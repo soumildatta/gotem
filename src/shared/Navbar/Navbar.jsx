@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "./Logo";
 import logo from '../logo_v1.png'
 
 
