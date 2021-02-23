@@ -1,6 +1,5 @@
 import React from "react";
-import logo from '../logo_v1.png'
-
+import Logo from "./Logo";
 
 const Navbar = () => {
   return (
@@ -10,7 +9,7 @@ const Navbar = () => {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#" className="flex justify-center items-center">
               <span className="sr-only">Workflow</span>
-              <img class="mx-auto h-14 w-auto" src={logo} alt="Workflow"/>
+              <Logo />
               <h1 className="text-white font-medium text-3xl ml-4">GOTEM</h1>
             </a>
           </div>
