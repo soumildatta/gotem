@@ -19,7 +19,7 @@ const Requests = () => {
     return (
 
         <div class="flex flex-col">
-        <h2 className="mt-6 text-center text-4xl font-extrabold text-gray-900 flex justify-left ">Requests</h2>
+        <h2 className="mt-6 text-center text-5xl font-medium ml-3 mb-4 text-gray-900 flex justify-left ">Requests</h2>
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
