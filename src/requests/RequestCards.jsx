@@ -21,7 +21,7 @@ const RequestCards = ( {data} ) => {
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     { data.status == "Emergency" ? (<span class="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-500 text-black">{data.status}</span>) :
-                    (<span class="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-500 text-black">{data.status}</span>)}
+                    (<span class="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-black">{data.status}</span>)}
                     {/* <span class="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-500 text-black">
                       {data.status}
                     </span> */}

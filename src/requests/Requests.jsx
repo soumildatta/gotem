@@ -13,7 +13,7 @@ const Requests = () => {
           name: "Joe Cooper",
           info: "Ehh, aight.",
           address: "3598 Mansion House Manor, Poor Place, MS 38655",
-          status: "Okay",
+          status: "Normal",
         },
       ];
     return (
