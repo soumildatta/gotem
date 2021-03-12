@@ -10,7 +10,7 @@ const Requestaride = () => {
 					<div className="rounded-md shadow-0 space-y-6">
 						<div className="flex flex-col">
 							<label for="info" className="text-lg">Info:</label>
-							<select name="info" id="info" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
+							<select name="info" id="info" class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
 								<optgroup label="Info">
 									<option value="" disabled selected>(Optional)</option>
 									<option value="fine">I'm probably fine</option>
@@ -25,12 +25,12 @@ const Requestaride = () => {
 						<div>
 							<p className="text-lg">Your Location</p>
 							<label for="your-location" class="sr-only">Your location</label>
-							<input id="your-location" name="location" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Your location"></input>
+							<input id="your-location" name="location" type="text" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Your location"></input>
 						</div>
 
 						<div className="flex flex-col">
 							<label for="info" className="text-lg">Available Hospitals:</label>
-							<select name="available-hospitals" id="available-hospitals" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
+							<select name="available-hospitals" id="available-hospitals" class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
 								<optgroup label="Available Hospitals">
 									<option value="" disabled selected>(Required)</option>
 									<option value="bruh">bruh hospital</option>
