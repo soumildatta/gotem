@@ -15,7 +15,7 @@ const RequestCards = ({ data }) => {
         <div class="text-sm text-gray-900">{data.address}</div>
       </td>
       <td class="px-6 py-4 whitespace-nowrap">
-        {data.status == "Emergency" ? (
+        {data.status === "Emergency" ? (
           <span class="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-500 text-white">
             {data.status}
           </span>
