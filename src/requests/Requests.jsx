@@ -50,7 +50,6 @@ const Requests = () => {
                   </th>
                 </tr>
               </thead>
-              {/* <RequestCards/> */}
               <tbody class="bg-white divide-y divide-gray-200">
                 {requestsdata.map((requestsdata) => (
                   <RequestCards data={requestsdata} />
