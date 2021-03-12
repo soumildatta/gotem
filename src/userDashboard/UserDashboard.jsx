@@ -14,19 +14,19 @@ const UserDashboard = () => {
                     scope="col"
                     class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Name
+                    Driver
                   </th>
                   <th
                     scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Address
+                    Price
                   </th>
                   <th
                     scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Status
+                    Destination
                   </th>
                   <th scope="col" class="relative px-6 py-3">
                     <span class="sr-only">Options</span>
