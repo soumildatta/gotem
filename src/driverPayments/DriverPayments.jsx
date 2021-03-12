@@ -60,10 +60,6 @@ const DriverPayments = () => {
                   {earnings.map((earning) => (
                     <PaymentCard data={earning} key={earning.id} />
                   ))}
-
-                  {/*                   
-                  <PaymentCard />
-                  <PaymentCard /> */}
                 </tbody>
               </table>
             </div>
