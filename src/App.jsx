@@ -4,7 +4,7 @@ import Signup from "./login/signup";
 import Signin from "./login/signin"
 import DriverPayments from "./driverPayments/DriverPayments";
 import Requests from "./requests/Requests";
-
+import UserDashboard from "./userDashboard/UserDashboard";
 function App() {
   return (
     <div className="App overflow-x-hidden overflow-y-hidden">
@@ -13,8 +13,9 @@ function App() {
       <Signin/>
 
       <div className="overflow-x-hidden overflow-y-hidden">
-        <DriverPayments />
-        <Requests />
+        {/* <DriverPayments />
+        <Requests /> */}
+        <UserDashboard />
       </div>
     </div>
   );
