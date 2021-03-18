@@ -2,7 +2,7 @@ import React from "react";
 
 const CurrentRequest = () => {
   return (
-    <div className="border rounded-md border-gray-700 my-8 mx-6 text-center">
+    <div>
       <div className="text-3xl my-2">Current Request:</div>
       <p className="my-2">
         Destination:{" "}
