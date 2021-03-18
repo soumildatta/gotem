@@ -1,19 +1,24 @@
 import React from "react";
 
-const CurrentRequest = () => {
+const CurrentRequest = ({ ride }) => {
   return (
-    <div>
+    <div className="border rounded-md border-gray-700">
       <div className="text-3xl my-2">Current Request:</div>
       <p className="my-2">
-        Destination:{" "}
-        <span className="font-medium">Hello Kitty Hospital, HAHA 12345</span>
+        Destination: &nbsp;
+        <span className="font-medium">{ride.destination}</span>
       </p>
       <div className="flex justify-around">
         <div className="mx-2">
-          <p>Ride Status:</p>
+          <p>
+            Ride Status: &nbsp;
+            <span className="font-semibold">{ride.rideStatus}</span>
+          </p>
         </div>
         <div className="mx-2">
-          <p>Driver:</p>
+          <p>
+            Driver: &nbsp; <span className="font-semibold">{ride.driver}</span>
+          </p>
         </div>
         <div className="mx-2">
           <p>Other important info</p>

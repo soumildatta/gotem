@@ -10,12 +10,16 @@ const UserDashboard = () => {
     destination: "Hello Kitty Hospital, HAHA 12345",
   };
 
-  const ride = true;
+  const ride = Object.keys(currentRequest).length === 0;
 
   return (
     <div>
-      <div className="border rounded-md border-gray-700 my-8 mx-6 text-center">
-        {ride ? <CurrentRequest /> : <RequestRideButton />}
+      <div className="my-8 mx-6 text-center">
+        {!ride ? (
+          <CurrentRequest ride={currentRequest} />
+        ) : (
+          <RequestRideButton />
+        )}
       </div>
 
       {/* <CurrentRequest /> */}
