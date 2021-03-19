@@ -5,7 +5,7 @@ import Requests from "./requests/Requests";
 import Navbar from "./shared/Navbar/Navbar";
 import DriverPayments from "./driverPayments/DriverPayments";
 
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 
 function App() {
@@ -17,13 +17,11 @@ function App() {
         <Navbar />
       </div>
 
-      <Switch>
-        {/*<Route exact path="/" component={Home}/>*/}
-        <Route path="/signup" component={Signup}/>
-        <Route path="/signin" component={Signin}/>
-        <Route path="/requests" component={Requests}/>
-        <Route path="/payment-history" component={DriverPayments}/>
-      </Switch>
+      {/*<Route exact path="/" component={Home}/>*/}
+      <Route path="/signup" component={Signup}/>
+      <Route path="/signin" component={Signin}/>
+      <Route path="/requests" component={Requests}/>
+      <Route path="/payment-history" component={DriverPayments}/>
 
     </Router>
   );
