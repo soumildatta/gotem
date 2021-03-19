@@ -1,23 +1,29 @@
 import "./App.css";
-import Navbar from "./shared/Navbar/Navbar";
 import Signup from "./login/signup";
 import Signin from "./login/signin"
-import DriverPayments from "./driverPayments/DriverPayments";
 import Requests from "./requests/Requests";
-import UserDashboard from "./userDashboard/UserDashboard";
+import Navbar from "./shared/Navbar/Navbar";
+import DriverPayments from "./driverPayments/DriverPayments";
+
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+
+
 function App() {
   return (
-    <div className="App overflow-x-hidden overflow-y-hidden">
-      <Navbar />
-      <Signup/>
-      <Signin/>
 
-      <div className="overflow-x-hidden overflow-y-hidden">
-        {/* <DriverPayments />
-        <Requests /> */}
-        <UserDashboard />
+    <Router>
+
+      <div className="App overflow-x-hidden overflow-y-hidden">
+        <Navbar />
       </div>
-    </div>
+
+      {/*<Route exact path="/" component={Home}/>*/}
+      <Route path="/signup" component={Signup}/>
+      <Route path="/signin" component={Signin}/>
+      <Route path="/requests" component={Requests}/>
+      <Route path="/payment-history" component={DriverPayments}/>
+
+    </Router>
   );
 }
 
