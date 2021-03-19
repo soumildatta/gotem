@@ -1,16 +1,17 @@
 import React from "react";
-import Logo from "./Logo";
+// import Logo from "./Logo";
+import Logo from "../logo_v1.png";
 
 const Navbar = () => {
   return (
     <div className="relative bg-primaryBlue">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center py-4 md:justify-start md:space-x-10">
+        <div className="flex justify-between items-center py-3 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#" className="flex justify-center items-center">
               <span className="sr-only">Workflow</span>
-              <Logo />
-              <h1 className="text-white font-medium text-3xl ml-4">GOTEM</h1>
+              <img src={Logo} alt="" className="h-12" />
+              <h1 className="text-white font-normal text-2xl ml-4">GOTEM</h1>
             </a>
           </div>
           <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
