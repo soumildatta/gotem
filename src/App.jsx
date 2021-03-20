@@ -1,6 +1,7 @@
 import Signup from "./pages/signup/signup";
 import Signin from "./pages/signin/signin";
 import Requests from "./pages/requests/Requests";
+import Home from "./pages/home/Home";
 import Navbar from "./shared/Navbar/Navbar";
 import DriverPayments from "./pages/driverPayments/DriverPayments";
 import UserDashboard from "./pages/userDashboard/UserDashboard";
@@ -14,7 +15,7 @@ function App() {
         <Navbar />
       </div>
 
-      {/*<Route exact path="/" component={Home}/>*/}
+      <Route exact path="/" component={Home} />
       <Route path="/signup" component={Signup} />
       <Route path="/signin" component={Signin} />
       <Route path="/requests" component={Requests} />
