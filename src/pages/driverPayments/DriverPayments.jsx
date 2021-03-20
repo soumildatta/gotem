@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import PaymentCard from "./PaymentCard";
+import ThEdgeAligned from "../../shared/TableHeader/ThEdgeAligned";
 
 const DriverPayments = () => {
   // should wrap in useMemo because later the data will be dynamic and we want to memoize the data
@@ -26,6 +27,7 @@ const DriverPayments = () => {
 
   const lifetimeEarning = useMemo(() => {
     const val = earnings.reduce((sum, obj) => (sum += obj.earnings), 0);
+    // regex adds a comma to the value of the price after every 3 digits
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }, [earnings]);
 
@@ -41,22 +43,7 @@ const DriverPayments = () => {
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Ride Info
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-8 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Earnings
-                    </th>
-                  </tr>
-                </thead>
+                <ThEdgeAligned header1="Ride Info" header2="Earnings" />
                 <tbody className="bg-white divide-y divide-gray-200">
                   {earnings.map((earning) => (
                     <PaymentCard data={earning} key={earning.id} />
