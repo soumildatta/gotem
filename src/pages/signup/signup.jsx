@@ -1,7 +1,8 @@
 import React from "react";
-import logo from "../shared/logo_v1.png";
+import logo from "../../shared/logo_v1.png";
 import { useState } from "react";
 
+// you are using 'class' in this file use 'className' instead
 const Signup = () => {
   /* TO USE LATER
     function validateEmail(email) {
@@ -44,6 +45,7 @@ const Signup = () => {
               <label for="email-address" class="sr-only">
                 Email address
               </label>
+              {/* these input fields are used a lot, best if you make these a reusable component passing the appropriate values as needed */}
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 id="email-address"

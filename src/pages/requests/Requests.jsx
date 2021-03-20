@@ -1,8 +1,9 @@
 import React from "react";
 import RequestCards from "./RequestCards";
 
+// you are using 'class' in this file use 'className' instead
 const Requests = () => {
-  const requestsdata = [
+  const requestsData = [
     {
       name: "Jane Cooper",
       info: "Yikes, not good",
@@ -27,6 +28,7 @@ const Requests = () => {
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
+                  {/* these are the same th, prolly better if we make things like this reusable considering we don't know what we'll be building in the future */}
                   <th
                     scope="col"
                     class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -51,8 +53,8 @@ const Requests = () => {
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
-                {requestsdata.map((requestsdata) => (
-                  <RequestCards data={requestsdata} />
+                {requestsData.map((data) => (
+                  <RequestCards data={data} />
                 ))}
               </tbody>
             </table>

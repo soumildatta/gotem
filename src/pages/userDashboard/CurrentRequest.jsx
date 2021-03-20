@@ -25,10 +25,11 @@ const CurrentRequest = ({ ride }) => {
         </div>
       </div>
       <div className="flex justify-center mb-2">
-        <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 my-3 mx-2 rounded-md ">
+        {/* these could be a reusable component */}
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 my-3 mx-2 rounded-md ">
           Edit Ride
         </button>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 my-3 mx-2 rounded-md ">
+        <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 my-3 mx-2 rounded-md ">
           Cancel Ride
         </button>
       </div>

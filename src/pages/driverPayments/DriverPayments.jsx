@@ -1,38 +1,39 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PaymentCard from "./PaymentCard";
 
 const DriverPayments = () => {
-  const earnings = [
-    {
-      id: 1,
-      name: "Jane Cooper",
-      to: "Baptist Memorial Hospital, MS 38655",
-      from: "1253 Mansion House Manor, Poor Place, MS",
-      date: "25/32/1242",
-      earnings: 18.0,
-    },
-    {
-      id: 2,
-      name: "Haloco Lapcopaote",
-      to: "Memorial Hospital of Baptist, MS 38657",
-      from: "1253 Cottage Hut House, Rich Place, MS",
-      date: "23/02/2623",
-      earnings: 78.0,
-    },
-  ];
+  // should wrap in useMemo because later the data will be dynamic and we want to memoize the data
+  const earnings = useMemo(() => {
+    return [
+      {
+        id: 1,
+        name: "Jane Cooper",
+        to: "Baptist Memorial Hospital, MS 38655",
+        from: "1253 Mansion House Manor, Poor Place, MS",
+        date: "25/32/1242",
+        earnings: 18.0,
+      },
+      {
+        id: 2,
+        name: "Haloco Lapcopaote",
+        to: "Memorial Hospital of Baptist, MS 38657",
+        from: "1253 Cottage Hut House, Rich Place, MS",
+        date: "23/02/2623",
+        earnings: 78.0,
+      },
+    ];
+  }, []);
 
-  const lifetimeEarning = earnings.reduce(
-    (sum, obj) => (sum += obj.earnings),
-    0
-  );
+  const lifetimeEarning = useMemo(() => {
+    const val = earnings.reduce((sum, obj) => (sum += obj.earnings), 0);
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }, [earnings]);
 
   return (
     <div className="item">
       <div className="text-center">
         <h4 className="mt-20 mb-2 text-lg">Lifetime Earnings:</h4>
-        <h1 className="text-5xl">
-          ${lifetimeEarning.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-        </h1>
+        <h1 className="text-5xl">${lifetimeEarning}</h1>
         <h4 className="mt-10 mb-2 text-lg">Payment History:</h4>
       </div>
       <div className="flex flex-col">

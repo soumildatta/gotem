@@ -1,9 +1,8 @@
-import "./App.css";
-import Signup from "./login/signup";
-import Signin from "./login/signin"
-import Requests from "./requests/Requests";
+import Signup from "./pages/signup/signup";
+import Signin from "./pages/signin/signin"
+import Requests from "./pages/requests/Requests";
 import Navbar from "./shared/Navbar/Navbar";
-import DriverPayments from "./driverPayments/DriverPayments";
+import DriverPayments from "./pages/driverPayments/DriverPayments";
 
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 
@@ -21,7 +20,7 @@ function App() {
       <Route path="/signup" component={Signup}/>
       <Route path="/signin" component={Signin}/>
       <Route path="/requests" component={Requests}/>
-      <Route path="/payment-history" component={DriverPayments}/>
+      <Route path="/payments" component={DriverPayments}/>
 
     </Router>
   );
