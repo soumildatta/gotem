@@ -19,7 +19,7 @@ function App() {
       <Route path="/signin" component={Signin} />
       <Route path="/requests" component={Requests} />
       <Route path="/payments" component={DriverPayments} />
-      <Route path="/user_dashboard" component={UserDashboard} />
+      <Route path="/user-dashboard" component={UserDashboard} />
     </Router>
   );
 }
