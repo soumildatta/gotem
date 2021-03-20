@@ -3,6 +3,7 @@ import UserRequestCards from "./UserRequestCards";
 import CurrentRequest from "./CurrentRequest";
 import RequestRideButton from "./RequestRideButton";
 
+// you are using 'class' in this file use 'className' instead
 const UserDashboard = () => {
   const currentRequest = {
     rideStatus: "On the way",
@@ -15,6 +16,7 @@ const UserDashboard = () => {
   return (
     <div>
       <div className="my-8 mx-6 text-center">
+        {/* best to extract this into it's own function and has ride as a param */}
         {!ride ? (
           <CurrentRequest ride={currentRequest} />
         ) : (
@@ -30,6 +32,7 @@ const UserDashboard = () => {
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
+                    {/* think similar th are being used in another file, best to make these reusable */}
                     <th
                       scope="col"
                       class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
