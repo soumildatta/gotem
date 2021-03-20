@@ -26,6 +26,7 @@ const DriverPayments = () => {
 
   const lifetimeEarning = useMemo(() => {
     const val = earnings.reduce((sum, obj) => (sum += obj.earnings), 0);
+    // regex adds a comma to the value of the price after every 3 digits
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }, [earnings]);
 
