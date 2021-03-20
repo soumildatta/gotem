@@ -4,6 +4,9 @@ import Requests from "./pages/requests/Requests";
 import Home from "./pages/home/Home";
 import Navbar from "./shared/Navbar/Navbar";
 import DriverPayments from "./pages/driverPayments/DriverPayments";
+
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
+
 import UserDashboard from "./pages/userDashboard/UserDashboard";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -21,6 +24,7 @@ function App() {
       <Route path="/requests" component={Requests} />
       <Route path="/payments" component={DriverPayments} />
       <Route path="/user-dashboard" component={UserDashboard} />
+      <Route path="/forgot-password" component={ForgotPassword} />
     </Router>
   );
 }
