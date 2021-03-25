@@ -10,30 +10,30 @@ const FormSkeleton = ({
   onSubmit,
 }) => {
   return (
-    <div class="min-h-screen flex items-center justify-center -mt-12 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center -mt-12 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
         <div>
-          <img class="mx-auto h-20 w-auto" src={logo} alt="Workflow" />
-          <h2 class="mt-3 text-center text-3xl font-extrabold text-gray-900">
+          <img className="mx-auto h-20 w-auto" src={logo} alt="Workflow" />
+          <h2 className="mt-3 text-center text-3xl font-extrabold text-gray-900">
             Gotem
           </h2>
-          <p class="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-gray-600">
             {text} &nbsp;
             <Link
               to={linkDestination}
-              class="font-medium text-primaryBlue hover:text-blue-600"
+              className="font-medium text-primaryBlue hover:text-blue-600"
             >
               {linkText}
             </Link>
           </p>
         </div>
 
-        <form class="mt-8 space-y-6" onSubmit={onSubmit}>
-          <div class="rounded-md shadow-sm my-4">{children}</div>
+        <form className="mt-8 space-y-6" onSubmit={onSubmit}>
+          <div className="rounded-md shadow-sm my-4">{children}</div>
         </form>
 
-        <p class="text-center text-sm text-gray-600">
-          <Link to="/" class="font-medium text-primaryBlue hover:text-blue-600">
+        <p className="text-center text-sm text-gray-600">
+          <Link to="/" className="font-medium text-primaryBlue hover:text-blue-600">
             RETURN HOME
           </Link>
         </p>
