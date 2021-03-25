@@ -12,14 +12,14 @@ const Requests = () => {
         name: "Jane Cooper",
         info: "Yikes, not good",
         address: "3598 Mansion House Manor, Poor Place, MS 38655",
-        status: "Emergency",
+        time: "01/01/2021 12:69 PM",
       },
       {
         id: 2,
         name: "Joe Cooper",
         info: "Ehh, aight.",
         address: "3598 Mansion House Manor, Poor Place, MS 38655",
-        status: "Normal",
+        time: "01/01/2022 12:69 PM",
       },
     ];
   }, []);
@@ -82,7 +82,7 @@ const Requests = () => {
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Status
+                    Time
                   </th>
                   <th scope="col" className="relative px-6 py-3">
                     <span className="sr-only">Options</span>
