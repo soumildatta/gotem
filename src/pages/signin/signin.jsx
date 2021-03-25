@@ -3,15 +3,36 @@ import { useState } from "react";
 import FormButton from "../../shared/FormButton";
 import FormSkeleton from "../../shared/FormSkeleton";
 import Input from "../../shared/Input";
+import { useAuth } from "../../contexts/AuthContext";
+import { useHistory, Link } from "react-router-dom";
 
-// you are using 'class' in this file use 'className' instead
 const Signin = () => {
   const [email, setEmail] = useState("");
+  const [persona, setPersona] = useState("driver");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  const { signin } = useAuth();
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password);
-  };
+
+    try {
+      setError("");
+      setLoading(true);
+      await signin(email, password);
+      if (persona == "passenger") {
+        history.push("/dashboard");
+      } else {
+        history.push("/requests");
+      }
+    } catch {
+      setError("Failed to log in");
+    }
+
+    setLoading(false);
+  }
 
   return (
     <FormSkeleton
@@ -20,6 +41,12 @@ const Signin = () => {
       linkDestination="/signup"
       onSubmit={handleSubmit}
     >
+      {error && (
+        <div className="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+          {error}
+        </div>
+      )}
+
       <input type="hidden" name="remember" value="true" />
 
       <Input
@@ -35,26 +62,18 @@ const Signin = () => {
         type="password"
       />
 
-      <div class="flex items-center justify-between">
-        <div class="flex items-center my-4">
-          <input
-            id="remember_me"
-            name="remember_me"
-            type="checkbox"
-            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-          />
-          <label for="remember_me" class="ml-2 block text-sm text-gray-900">
-            Remember me
-          </label>
-        </div>
+      <div className="flex items-center justify-between">
 
-        <div class="text-sm">
-          <a href="#" class="font-medium text-primaryBlue hover:text-blue-600">
+        <div className="text-sm">
+          <Link
+            to="/forgot-password"
+            className="font-medium text-primaryBlue hover:text-blue-600"
+          >
             Forgot your password?
-          </a>
+          </Link>
         </div>
       </div>
-      <FormButton text="Log In"/>
+      <FormButton text="Log In" />
     </FormSkeleton>
   );
 };
