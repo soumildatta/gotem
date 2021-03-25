@@ -1,6 +1,7 @@
 import Signup from "./pages/signup/signup";
 import Signin from "./pages/signin/signin";
 import Requests from "./pages/requests/Requests";
+import RequestRide from "./pages/requestRide/RequestRide";
 import Home from "./pages/home/Home";
 import Navbar from "./shared/Navbar/Navbar";
 import DriverPayments from "./pages/driverPayments/DriverPayments";
@@ -22,6 +23,7 @@ function App() {
       <Route path="/signup" component={Signup} />
       <Route path="/signin" component={Signin} />
       <Route path="/requests" component={Requests} />
+      <Route path="/request" component={RequestRide} />
       <Route path="/payments" component={DriverPayments} />
       <Route path="/user-dashboard" component={UserDashboard} />
       <Route path="/forgot-password" component={ForgotPassword} />

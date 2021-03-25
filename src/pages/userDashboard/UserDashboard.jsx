@@ -2,24 +2,28 @@ import React from "react";
 import UserRequestCards from "./UserRequestCards";
 import CurrentRequest from "./CurrentRequest";
 import RequestRideButton from "./RequestRideButton";
-import ThEdgeAligned from "../../shared/TableHeader/ThEdgeAligned";
-import { render } from "@testing-library/react";
+import ThEdgeAligned from "../../shared/ThEdgeAligned";
 
 const UserDashboard = () => {
   const currentRequest = {
+    time: "01/22/33 at 10:30am",
     rideStatus: "On the way",
     driver: "Big Boi",
     destination: "Hello Kitty Hospital, HAHA 12345",
+  };
+
+  const handleClick = () => {
+    console.log("kleek");
   };
 
   const ride = Object.keys(currentRequest).length === 0;
   const RenderRideDetails = () => {
     return (
       <div className="my-8 mx-6 text-center">
-        {!ride ? (
-          <CurrentRequest ride={currentRequest} />
-        ) : (
+        {ride ? (
           <RequestRideButton />
+        ) : (
+          <CurrentRequest ride={currentRequest} handleClick={handleClick} />
         )}
       </div>
     );
