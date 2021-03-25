@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import PaymentCard from "./PaymentCard";
-import ThEdgeAligned from "../../shared/TableHeader/ThEdgeAligned";
+import ThEdgeAligned from "../../shared/ThEdgeAligned";
 
 const DriverPayments = () => {
   // should wrap in useMemo because later the data will be dynamic and we want to memoize the data

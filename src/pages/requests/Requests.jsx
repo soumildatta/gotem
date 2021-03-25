@@ -1,25 +1,62 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import RequestCards from "./RequestCards";
+import AcceptedRequestCard from "./AcceptedRequestCard";
 
-// you are using 'class' in this file use 'className' instead
 const Requests = () => {
-  const requestsData = [
-    {
-      name: "Jane Cooper",
-      info: "Monthly Checkup",
-      address: "3598 Mansion House Manor, Poor Place, MS 38655",
-      time: "12:30 PM",
-    },
-    {
-      name: "Joe Cooper",
-      info: "Visit",
-      address: "3598 Mansion House Manor, Poor Place, MS 38655",
-      time: "2:00 PM",
-    },
-  ];
+  const [rideStatus, setRideStatus] = useState("On My Way");
+
+  const requestsData = useMemo(() => {
+    return [
+      {
+        id: 1,
+        name: "Jane Cooper",
+        info: "Yikes, not good",
+        address: "3598 Mansion House Manor, Poor Place, MS 38655",
+        status: "Emergency",
+      },
+      {
+        id: 2,
+        name: "Joe Cooper",
+        info: "Ehh, aight.",
+        address: "3598 Mansion House Manor, Poor Place, MS 38655",
+        status: "Normal",
+      },
+    ];
+  }, []);
+
+  const rideRequest = {
+    time: "01/22/33 at 10:30am",
+    rideStatus: rideStatus,
+    name: "Smol Boi",
+    destination: "Large Hospital, Mippississi",
+    riderAddress: "Smol House place thing",
+  };
+
+  const handleStatusChange = (button) => {
+    if (button !== "Cancel") {
+      if (window.confirm(`Change status to "${button}"?`)) {
+        setRideStatus(button);
+        // firestore stuff here
+      }
+    } else {
+      // Request is cancelled by driver ??
+      if (
+        window.confirm("Are you sure you want to cancel this user's request?")
+      ) {
+        setRideStatus("Cancelled");
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col">
-      <h2 className="mt-6 text-center text-5xl font-medium ml-3 mb-4 text-gray-900 flex justify-left ">
+      <div className="my-8 mx-6 text-center">
+        <AcceptedRequestCard
+          request={rideRequest}
+          handleClick={handleStatusChange}
+        />
+      </div>
+      <h2 className="mt-6 text-center text-4xl font-medium ml-3 mb-4 text-gray-900 flex justify-left ">
         Requests
       </h2>
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -54,7 +91,7 @@ const Requests = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {requestsData.map((data) => (
-                  <RequestCards data={data} />
+                  <RequestCards key={data.id} data={data} />
                 ))}
               </tbody>
             </table>

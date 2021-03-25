@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ onChange, fieldName, type, round }) => {
+const Input = ({ onChange, fieldName, type, round, required = false }) => {
   const chooseRounding = () => {
     if (round === "top") {
       return "rounded-t-md";
@@ -24,9 +24,8 @@ const Input = ({ onChange, fieldName, type, round }) => {
         id={fieldName}
         name={fieldName}
         type={type}
-        autoComplete={fieldName}
-        required
-        class={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 ${chooseRounding()} focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+        required={required}
+        class={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 ${chooseRounding()} focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm `}
         placeholder={getUpperFieldName()}
       />
     </div>
