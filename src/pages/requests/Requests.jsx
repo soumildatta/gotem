@@ -12,14 +12,14 @@ const Requests = () => {
         name: "Jane Cooper",
         info: "Yikes, not good",
         address: "3598 Mansion House Manor, Poor Place, MS 38655",
-        status: "Emergency",
+        time: "01/01/2021 12:69 PM",
       },
       {
         id: 2,
         name: "Joe Cooper",
         info: "Ehh, aight.",
         address: "3598 Mansion House Manor, Poor Place, MS 38655",
-        status: "Normal",
+        time: "01/01/2022 12:69 PM",
       },
     ];
   }, []);
