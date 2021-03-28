@@ -1,8 +1,12 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import RequestCards from "./RequestCards";
 import AcceptedRequestCard from "./AcceptedRequestCard";
 
 const Requests = () => {
+  // changes the <html> bgColor on mount
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = "#ffffff";
+  }, []);
   const [rideStatus, setRideStatus] = useState("On My Way");
 
   const requestsData = useMemo(() => {

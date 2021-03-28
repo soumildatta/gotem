@@ -3,7 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import Logo from "../logo_v1.png";
 import { useAuth } from "../../contexts/AuthContext";
-import { auth } from "../../firebase";
 import NavLink from "./NavLink.jsx";
 
 const Navbar = () => (
@@ -50,24 +49,10 @@ const LogOutButton = () => {
 };
 
 const Links = () => {
-  const history = useHistory();
-  const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { isLoggedIn } = useAuth();
   const [persona, setPersona] = useState("passenger");
-  const [loggedIn, setLoggedIn] = useState(Boolean(currentUser));
 
-  async function handleLogout() {
-    setError("");
-
-    try {
-      await logout();
-      history.push("/");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
-
-  if (loggedIn == false) {
+  if (isLoggedIn === false) {
     return (
       <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
         <NavLink linkName="Sign In" linkDestination="/signin" />
@@ -79,7 +64,7 @@ const Links = () => {
         </a>
       </div>
     );
-  } else if (loggedIn == true && persona == "passenger") {
+  } else if (isLoggedIn === true && persona === "passenger") {
     return (
       <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
         <NavLink linkName="Request Ride" linkDestination="/request" />
