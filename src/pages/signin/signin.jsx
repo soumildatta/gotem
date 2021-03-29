@@ -8,7 +8,7 @@ import { useHistory, Link } from "react-router-dom";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
-  const [persona, setPersona] = useState("driver");
+  const [persona, setPersona] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const Signin = () => {
       setError("");
       setLoading(true);
       await signin(email, password);
-      if (persona == "passenger") {
+      if (persona === "passenger") {
         history.push("/dashboard");
       } else {
         history.push("/requests");

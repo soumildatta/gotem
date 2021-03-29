@@ -4,6 +4,7 @@ import Signin from "./pages/signin/signin";
 import Navbar from "./shared/Navbar/Navbar";
 import Requests from "./pages/requests/Requests";
 import RequestRide from "./pages/requestRide/RequestRide";
+import PrivateRoute from "./shared/PrivateRoute";
 import UserDashboard from "./pages/userDashboard/UserDashboard";
 import DriverPayments from "./pages/driverPayments/DriverPayments";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
@@ -23,11 +24,13 @@ function App() {
 
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
-        <Route path="/request" component={RequestRide} />
-        <Route path="/requests" component={Requests} />
-        <Route path="/payments" component={DriverPayments} />
-        <Route path="/dashboard" component={UserDashboard} />
         <Route path="/forgot-password" component={ForgotPassword} />
+
+        <PrivateRoute path="/requests" component={Requests} />
+        <PrivateRoute path="/request" component={RequestRide} />
+        <PrivateRoute path="/payments" component={DriverPayments} />
+        <PrivateRoute path="/dashboard" component={UserDashboard} />
+        
         
       </Router>
     </AuthProvider>
