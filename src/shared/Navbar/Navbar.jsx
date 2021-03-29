@@ -4,6 +4,9 @@ import { useState } from "react";
 import Logo from "../logo_v1.png";
 import { useAuth } from "../../contexts/AuthContext";
 import NavLink from "./NavLink.jsx";
+import firebase from "firebase";
+import { db } from "../../firebase";
+
 
 const Navbar = () => (
   <div className="relative bg-primaryBlue">
@@ -48,9 +51,11 @@ const LogOutButton = () => {
   );
 };
 
+
 const Links = () => {
   const { isLoggedIn } = useAuth();
   const [persona, setPersona] = useState("passenger");
+  const currentUser = firebase.auth().currentUser;
 
   if (isLoggedIn === false) {
     return (
@@ -64,23 +69,40 @@ const Links = () => {
         </a>
       </div>
     );
-  } else if (isLoggedIn === true && persona === "passenger") {
-    return (
-      <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
-        <NavLink linkName="Request Ride" linkDestination="/request" />
-        <NavLink linkName="Dashboard" linkDestination="/dashboard" />
-        <LogOutButton />
-      </div>
-    );
-  } else {
-    return (
-      <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
-        <NavLink linkName="Ride Requests" linkDestination="/requests" />
-        <NavLink linkName="Payments" linkDestination="/payments" />
-        <LogOutButton />
-      </div>
-    );
-  }
+  } 
+
+  else {
+    if (currentUser != null) {
+      db.collection("Users").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (currentUser.email === doc.id){
+            setPersona(doc.data().persona);
+            console.log("Hey " + persona);
+          }
+        });
+      });
+    }
+    
+    if (persona === "passenger"){
+      return (
+        <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
+          <NavLink linkName="Request Ride" linkDestination="/request" />
+          <NavLink linkName="Dashboard" linkDestination="/dashboard" />
+          <LogOutButton />
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
+          <NavLink linkName="Ride Requests" linkDestination="/requests" />
+          <NavLink linkName="Payments" linkDestination="/payments" />
+          <LogOutButton />
+        </div>
+      );
+    }
+    
+  } 
 };
 
 export default Navbar;

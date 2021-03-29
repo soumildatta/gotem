@@ -1,17 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import Input from "../../shared/Input";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import FormButton from "../../shared/FormButton";
 import FormSkeleton from "../../shared/FormSkeleton";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Signup = () => {
-  /* TO USE LATER
-    function validateEmail(email) {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-  }*/
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,14 +15,14 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const { signup, currentUser } = useAuth();
+  const { signup } = useAuth();
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
+      await signup(email, password, persona);
       if (persona == "passenger") {
         history.push("/dashboard");
       } else {
@@ -69,9 +64,11 @@ const Signup = () => {
       <div className="my-4">
         <label> Sign up as </label>
         <select
+          required
           className="w-full p-2 rounded-md"
           onChange={(e) => setPersona(e.target.value)}
         >
+          <option value=""> Please select </option>
           <option value="driver" className="p-2 hover:bg-gray-200">
             {" "}
             Driver{" "}
