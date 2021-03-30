@@ -7,7 +7,6 @@ import FormSkeleton from "../../shared/FormSkeleton";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Signup = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [persona, setPersona] = useState("");
@@ -23,9 +22,9 @@ const Signup = () => {
       setLoading(true);
       await signup(email, password, persona);
       if (persona === "passenger") {
-        localStorage.setItem('redirect', '/dashboard');
+        localStorage.setItem("redirect", "/dashboard");
       } else {
-        localStorage.setItem('redirect', '/requests');
+        localStorage.setItem("redirect", "/requests");
       }
     } catch {
       setError("Failed to create an account");

@@ -14,21 +14,23 @@ const Signin = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  async function redirect(){
-    db.collection("Users").doc(email).get().then((doc) => {
-      if (doc.data().persona === "passenger"){
-        console.log("true");
-        history.push("/dashboard");
-      }
-      else{
-        history.push("/requests");
-      }
-    });
+  async function redirect() {
+    db.collection("Users")
+      .doc(email)
+      .get()
+      .then((doc) => {
+        if (doc.data().persona === "passenger") {
+          console.log("true");
+          history.push("/dashboard");
+        } else {
+          history.push("/requests");
+        }
+      });
   }
-  
+
   async function handleSubmit(e) {
     e.preventDefault();
-    
+
     try {
       setError("");
       setLoading(true);
@@ -70,7 +72,6 @@ const Signin = () => {
       />
 
       <div className="flex items-center justify-between">
-
         <div className="text-sm">
           <Link
             to="/forgot-password"
