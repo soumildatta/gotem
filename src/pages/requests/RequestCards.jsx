@@ -1,6 +1,19 @@
 import React from "react";
 
 const RequestCards = ({ data }) => {
+  const formatTime = (time) => {
+    time = time
+      .toString()
+      .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) {
+      time = time.slice(1);
+      time[5] = +time[0] < 12 ? "AM" : "PM";
+      time[0] = +time[0] % 12 || 12;
+    }
+    return time.join("");
+  };
+
   return (
     <tr>
       <td className="px-4 py-4 whitespace-nowrap">
@@ -18,7 +31,7 @@ const RequestCards = ({ data }) => {
         {/* these are the same span, prolly better if we make things like this reusable considering we don't know what we'll be building in the future */}
         {/* also, best practice is to break this logic out into a function above and pass data.status as a param returning the correct span */}
         <span className="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full border border-black text-black">
-          {data.date} at {data.time}
+          {data.date} at {formatTime(data.time)}
         </span>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
