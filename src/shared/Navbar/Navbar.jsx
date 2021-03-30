@@ -77,7 +77,6 @@ const Links = () => {
         querySnapshot.forEach((doc) => {
           if (currentUser.email === doc.id){
             setPersona(doc.data().persona);
-            console.log("Hey " + persona);
           }
         });
       });

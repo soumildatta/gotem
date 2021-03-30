@@ -13,7 +13,6 @@ const Signup = () => {
   const [persona, setPersona] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
   const { signup } = useAuth();
   async function handleSubmit(e) {
@@ -23,10 +22,10 @@ const Signup = () => {
       setError("");
       setLoading(true);
       await signup(email, password, persona);
-      if (persona == "passenger") {
-        history.push("/dashboard");
+      if (persona === "passenger") {
+        localStorage.setItem('redirect', '/dashboard');
       } else {
-        history.push("/requests");
+        localStorage.setItem('redirect', '/requests');
       }
     } catch {
       setError("Failed to create an account");

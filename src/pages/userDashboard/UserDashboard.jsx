@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UserRequestCards from "./UserRequestCards";
 import CurrentRequest from "./CurrentRequest";
 import RequestRideButton from "./RequestRideButton";
 import ThEdgeAligned from "../../shared/ThEdgeAligned";
 
 const UserDashboard = () => {
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = "#ffffff";
+  }, []);
+
   const currentRequest = {
     time: "01/22/33 at 10:30am",
     rideStatus: "On the way",

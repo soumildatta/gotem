@@ -1,32 +1,39 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormButton from "../../shared/FormButton";
 import FormSkeleton from "../../shared/FormSkeleton";
 import Input from "../../shared/Input";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory, Link } from "react-router-dom";
+import { db } from "../../firebase";
 
 const Signin = () => {
+  const { signin } = useAuth();
   const [email, setEmail] = useState("");
-  const [persona, setPersona] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const { signin } = useAuth();
+  async function redirect(){
+    db.collection("Users").doc(email).get().then((doc) => {
+      if (doc.data().persona === "passenger"){
+        console.log("true");
+        history.push("/dashboard");
+      }
+      else{
+        history.push("/requests");
+      }
+    });
+  }
+  
   async function handleSubmit(e) {
     e.preventDefault();
-
+    
     try {
       setError("");
       setLoading(true);
       await signin(email, password);
-      if (persona === "passenger") {
-        history.push("/dashboard");
-      } else {
-        history.push("/requests");
-      }
+      redirect();
     } catch {
       setError("Failed to log in");
     }
