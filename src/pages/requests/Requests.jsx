@@ -1,31 +1,27 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import RequestCards from "./RequestCards";
 import AcceptedRequestCard from "./AcceptedRequestCard";
-
+import { db } from "../../firebase";
 const Requests = () => {
   // changes the <html> bgColor on mount
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#ffffff";
   }, []);
   const [rideStatus, setRideStatus] = useState("On My Way");
+  const [requestsData, setRequestsData] = useState([]);
 
-  const requestsData = useMemo(() => {
-    return [
-      {
-        id: 1,
-        name: "Jane Cooper",
-        info: "Yikes, not good",
-        address: "3598 Mansion House Manor, Poor Place, MS 38655",
-        time: "01/01/2021 12:69 PM",
-      },
-      {
-        id: 2,
-        name: "Joe Cooper",
-        info: "Ehh, aight.",
-        address: "3598 Mansion House Manor, Poor Place, MS 38655",
-        time: "01/01/2022 12:69 PM",
-      },
-    ];
+  const ref = db.collection("Requests");
+  function getRequests() {
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push({ ...doc.data(), id: doc.id });
+      });
+      setRequestsData(items);
+    });
+  }
+  useEffect(() => {
+    getRequests();
   }, []);
 
   const rideRequest = {
