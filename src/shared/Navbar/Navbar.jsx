@@ -7,7 +7,6 @@ import NavLink from "./NavLink.jsx";
 import firebase from "firebase";
 import { db } from "../../firebase";
 
-
 const Navbar = () => (
   <div className="relative bg-primaryBlue">
     <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -51,7 +50,6 @@ const LogOutButton = () => {
   );
 };
 
-
 const Links = () => {
   const { isLoggedIn } = useAuth();
   const [persona, setPersona] = useState("passenger");
@@ -69,21 +67,20 @@ const Links = () => {
         </a>
       </div>
     );
-  } 
-
-  else {
+  } else {
     if (currentUser != null) {
-      db.collection("Users").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          if (currentUser.email === doc.id){
-            setPersona(doc.data().persona);
-            console.log("Hey " + persona);
-          }
+      db.collection("Users")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            if (currentUser.email === doc.id) {
+              setPersona(doc.data().persona);
+            }
+          });
         });
-      });
     }
-    
-    if (persona === "passenger"){
+
+    if (persona === "passenger") {
       return (
         <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
           <NavLink linkName="Request Ride" linkDestination="/request" />
@@ -91,8 +88,7 @@ const Links = () => {
           <LogOutButton />
         </div>
       );
-    }
-    else {
+    } else {
       return (
         <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
           <NavLink linkName="Ride Requests" linkDestination="/requests" />
@@ -101,8 +97,7 @@ const Links = () => {
         </div>
       );
     }
-    
-  } 
+  }
 };
 
 export default Navbar;
