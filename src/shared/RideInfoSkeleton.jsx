@@ -21,7 +21,15 @@ const RideInfoSkeleton = ({
       <div key={key} className="mx-2">
         <p>
           {subtitle}: &nbsp;
-          <span className="font-semibold">{value}</span>
+          <span className="font-semibold">
+            {subtitle === "Time" ? (
+              <>
+                {value.date} at {value.time}
+              </>
+            ) : (
+              <>{value}</>
+            )}
+          </span>
         </p>
       </div>
     );
@@ -41,8 +49,18 @@ const RideInfoSkeleton = ({
   const userButtons = () => {
     return (
       <div className="flex justify-center mb-2">
-        <CardButton handleClick={handleClick} text="Edit Ride" color="blue" />
-        <CardButton handleClick={handleClick} text="Cancel Ride" color="red" />
+        <CardButton
+          handleClick={handleClick}
+          id="edit"
+          text="Edit Ride"
+          color="blue"
+        />
+        <CardButton
+          handleClick={handleClick}
+          id="cancel"
+          text="Cancel Ride"
+          color="red"
+        />
       </div>
     );
   };
