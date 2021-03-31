@@ -56,7 +56,7 @@ const RequestRide = () => {
   return (
     <div className="min-h-screen -mt-20 flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl w-full space-y-10">
-        <h2 className="ext-center text-6xl font-extrabold text-gray-900 flex justify-left ">
+        <h2 className="text-center text-4xl font-extrabold text-gray-900 flex justify-left pt-32">
           Request a Ride
         </h2>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -124,8 +124,8 @@ const RequestRide = () => {
               </select>
             </div>
 
-            <div className="flex justify-between">
-              <div className="w-full mr-2">
+            <div className="flex justify-between flex-col md:flex-row">
+              <div className="w-1/2 mr-2 min-w-min">
                 <label htmlFor="date">Ride Date:</label>
                 <input
                   required
@@ -137,7 +137,7 @@ const RequestRide = () => {
                   } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                 />
               </div>
-              <div className="w-full ml-2">
+              <div className="w-1/2 md:ml-2 min-w-min">
                 <label htmlFor="time">Ride Time:</label>
                 <input
                   required
