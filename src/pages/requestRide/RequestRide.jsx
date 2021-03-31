@@ -40,6 +40,10 @@ const RequestRide = () => {
           info: input.info,
           date: input.date,
           time: input.time,
+          completed: false,
+          driver: "",
+          status: "",
+          price: "",
         })
         .catch((error) => {
           // prolly need a better way to handle the errors. or we could just make the users open up the console ya know

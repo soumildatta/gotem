@@ -3,15 +3,15 @@ import RideInfoSkeleton from "../../shared/RideInfoSkeleton";
 
 const CurrentRequest = ({ ride, handleClick }) => {
   const rideInfo = {
-    status: ride.rideStatus,
-    time: ride.time,
+    status: ride.status,
+    time: { date: ride.date, time: ride.time },
     driver: ride.driver,
   };
 
   return (
     <RideInfoSkeleton
       title="Current Request"
-      destination={ride.destination}
+      destination={ride.hospital}
       rideInfo={rideInfo}
       handleClick={handleClick}
     />
