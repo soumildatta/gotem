@@ -56,7 +56,7 @@ const RequestRide = () => {
   return (
     <div className="min-h-screen -mt-20 flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl w-full space-y-10">
-        <h2 className="ext-center text-6xl font-extrabold text-gray-900 flex justify-left ">
+        <h2 className="text-center text-4xl font-extrabold text-gray-900 flex justify-left pt-32">
           Request a Ride
         </h2>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -93,9 +93,7 @@ const RequestRide = () => {
                 name="location"
                 type="text"
                 required
-                className={`appearance-none relative block w-full px-3 py-2 border ${
-                  input.location === "" ? "border-red-500" : "border-gray-300"
-                } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Your location"
               ></input>
             </div>
@@ -109,9 +107,7 @@ const RequestRide = () => {
                 defaultValue=""
                 name="available-hospitals"
                 id="available-hospitals"
-                className={`appearance-none relative block w-full px-3 py-2 border ${
-                  input.hospital === "" ? "border-red-500" : "border-gray-300"
-                } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               >
                 <optgroup label="Available Hospitals">
                   <option value="" disabled>
@@ -124,29 +120,25 @@ const RequestRide = () => {
               </select>
             </div>
 
-            <div className="flex justify-between">
-              <div className="w-full mr-2">
+            <div className="flex justify-between flex-col md:flex-row">
+              <div className="w-full mr-2 min-w-min">
                 <label htmlFor="date">Ride Date:</label>
                 <input
                   required
                   onChange={(e) => setInput({ ...input, date: e.target.value })}
                   type="date"
                   id="date"
-                  className={`appearance-none relative block w-full px-3 py-2 border ${
-                    input.date === "" ? "border-red-500" : "border-gray-300"
-                  } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 />
               </div>
-              <div className="w-full ml-2">
+              <div className="w-full md:ml-2 min-w-min">
                 <label htmlFor="time">Ride Time:</label>
                 <input
                   required
                   onChange={(e) => setInput({ ...input, time: e.target.value })}
                   type="time"
                   id="time"
-                  className={`appearance-none relative block w-full px-3 py-2 border ${
-                    input.time === "" ? "border-red-500" : "border-gray-300"
-                  } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 />
               </div>
             </div>
