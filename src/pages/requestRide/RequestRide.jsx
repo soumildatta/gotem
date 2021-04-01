@@ -121,7 +121,7 @@ const RequestRide = () => {
             </div>
 
             <div className="flex justify-between flex-col md:flex-row">
-              <div className="w-1/2 mr-2 min-w-min">
+              <div className="w-full mr-2 min-w-min">
                 <label htmlFor="date">Ride Date:</label>
                 <input
                   required
@@ -131,7 +131,7 @@ const RequestRide = () => {
                   className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 />
               </div>
-              <div className="w-1/2 md:ml-2 min-w-min">
+              <div className="w-full md:ml-2 min-w-min">
                 <label htmlFor="time">Ride Time:</label>
                 <input
                   required
