@@ -1,37 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import UserRequestCards from "./UserRequestCards";
 import CurrentRequest from "./CurrentRequest";
 import RequestRideButton from "./RequestRideButton";
 import ThEdgeAligned from "../../shared/ThEdgeAligned";
-import { useAuth } from "../../contexts/AuthContext";
-import { db } from "../../firebase";
+import useFetchRequests from "../../hooks/useFetchRequests";
 
 const UserDashboard = () => {
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#ffffff";
   }, []);
 
-  const { currentUser } = useAuth();
-  const [requests, setRequests] = useState([]);
-  const [currentRequest, setCurrentRequest] = useState({});
-
-  // fetch from firestore
-  useEffect(() => {
-    db.collection("Requests")
-      .where("user", "==", currentUser.email)
-      .onSnapshot((querySnapshot) => {
-        const fetchedRequests = [];
-        querySnapshot.forEach((doc) => {
-          fetchedRequests.push({ ...doc.data(), id: doc.id });
-        });
-        setRequests(fetchedRequests);
-        setCurrentRequest(
-          fetchedRequests.filter((request) => {
-            return request.completed === false;
-          })[0]
-        );
-      });
-  }, []);
+  const { requests, currentRequest } = useFetchRequests({ isDriver: false });
 
   const hasCurrentRide = () => {
     return currentRequest === undefined;
