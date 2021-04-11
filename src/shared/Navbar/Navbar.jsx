@@ -54,12 +54,24 @@ const LogOutButton = () => {
   );
 };
 
+const Persona = () => {
+  const { isDriver } = useIsDriver();
+  const { currentRequest } = useFetchRequests(isDriver);
+  return (
+    <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
+      {!currentRequest && (
+        <NavLink linkName="Request Ride" linkDestination="/request" />
+      )}
+      <NavLink linkName="Dashboard" linkDestination="/dashboard" />
+      <LogOutButton />
+    </div>
+  );
+};
+
 const Links = () => {
   const { isLoggedIn } = useAuth("false");
   const [persona, setPersona] = useState("passenger");
   const currentUser = firebase.auth().currentUser;
-  const { isDriver } = useIsDriver();
-  const { currentRequest } = useFetchRequests(isDriver);
 
   if (isLoggedIn === false) {
     return (
@@ -87,15 +99,7 @@ const Links = () => {
     }
 
     if (persona === "passenger") {
-      return (
-        <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
-          {!currentRequest && (
-            <NavLink linkName="Request Ride" linkDestination="/request" />
-          )}
-          <NavLink linkName="Dashboard" linkDestination="/dashboard" />
-          <LogOutButton />
-        </div>
-      );
+      return <Persona />;
     } else {
       return (
         <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
