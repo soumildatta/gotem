@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FormButton from "../../shared/FormButton";
 import FormSkeleton from "../../shared/FormSkeleton";
 import Input from "../../shared/Input";
@@ -14,18 +14,15 @@ const Signin = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  async function redirect() {
-    db.collection("Users")
-      .doc(email)
-      .get()
-      .then((doc) => {
-        if (doc.data().persona === "passenger") {
-          console.log("true");
-          history.push("/dashboard");
-        } else {
-          history.push("/requests");
-        }
-      });
+  async function redirect(){
+    db.collection("Users").doc(email).get().then((doc) => {
+      if (doc.data().persona === "passenger"){
+        history.push("/dashboard");
+      }
+      else{
+        history.push("/requests");
+      }
+    });
   }
 
   async function handleSubmit(e) {
