@@ -1,18 +1,21 @@
+import React from "react";
 import Home from "./pages/home/Home";
 import Signup from "./pages/signup/signup";
 import Signin from "./pages/signin/signin";
 import Navbar from "./shared/Navbar/Navbar";
 import Requests from "./pages/requests/Requests";
+import DriverRoute from "./shared/DriverRoute";
+import PassengerRoute from "./shared/PassengerRoute";
 import RequestRide from "./pages/requestRide/RequestRide";
-import PrivateRoute from "./shared/PrivateRoute";
 import UserDashboard from "./pages/userDashboard/UserDashboard";
 import DriverPayments from "./pages/driverPayments/DriverPayments";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
+
   return (
     <AuthProvider>
       <Router>
@@ -26,10 +29,11 @@ function App() {
         <Route path="/signin" component={Signin} />
         <Route path="/forgot-password" component={ForgotPassword} />
 
-        <PrivateRoute path="/requests" component={Requests} />
-        <PrivateRoute path="/request" component={RequestRide} />
-        <PrivateRoute path="/payments" component={DriverPayments} />
-        <PrivateRoute path="/dashboard" component={UserDashboard} />
+        <DriverRoute path="/requests" component={Requests} />  
+        <DriverRoute path="/payments" component={DriverPayments} />
+
+        <PassengerRoute path="/request" component={RequestRide} />
+        <PassengerRoute path="/dashboard" component={UserDashboard} />
         
         
       </Router>

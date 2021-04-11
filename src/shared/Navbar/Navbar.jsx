@@ -45,13 +45,13 @@ const LogOutButton = () => {
 
   return (
     <div className="ml-8 whitespace-nowrap text-base font-medium text-white hover:text-gray-200">
-      <Link onClick={handleLogout}>Log Out</Link>
+      <Link to="" onClick={handleLogout}>Log Out</Link>
     </div>
   );
 };
 
 const Links = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth("false");
   const [persona, setPersona] = useState("passenger");
   const currentUser = firebase.auth().currentUser;
 

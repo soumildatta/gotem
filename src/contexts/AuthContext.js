@@ -27,6 +27,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    localStorage.setItem('refresh', 'true');
     return auth.signOut();
   }
 
