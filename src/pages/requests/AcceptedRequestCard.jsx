@@ -1,19 +1,19 @@
 import React from "react";
 import RideInfoSkeleton from "../../shared/RideInfoSkeleton";
 
-const AcceptedRequestCard = ({ request, handleClick }) => {
+const AcceptedRequestCard = ({ ride, handleClick }) => {
   const rideInfo = {
-    time: request.time,
-    name: request.name,
-    status: request.rideStatus,
+    time: { date: ride.date, time: ride.time },
+    name: ride.passenger,
+    status: ride.status,
   };
 
   return (
     <div>
       <RideInfoSkeleton
         title="Current Rider"
-        destination={request.destination}
-        riderAddress={request.riderAddress}
+        destination={ride.hospital}
+        riderAddress={ride.location}
         rideInfo={rideInfo}
         handleClick={handleClick}
         isDriver

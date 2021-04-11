@@ -1,6 +1,5 @@
 import React from "react";
-
-const RequestCards = ({ data }) => {
+const RequestCards = ({ data, acceptRequest, disableButton }) => {
   const formatTime = (time) => {
     time = time
       .toString()
@@ -12,6 +11,28 @@ const RequestCards = ({ data }) => {
       time[0] = +time[0] % 12 || 12;
     }
     return time.join("");
+  };
+  const renderButtons = () => {
+    if (disableButton === false) {
+      return (
+        <button
+          onClick={() => acceptRequest(data.id)}
+          className="px-8 py-2 inline-flex text-s leading-5 font-semibold rounded-full bg-green-100 hover:bg-green-200 text-green-800 mr-3"
+        >
+          Accept
+        </button>
+      );
+    } else {
+      return (
+        <button
+          disabled
+          onClick={() => acceptRequest(data.id)}
+          className="px-8 py-2 inline-flex text-s leading-5 font-semibold rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 mr-3"
+        >
+          Accept
+        </button>
+      );
+    }
   };
 
   return (
@@ -34,14 +55,7 @@ const RequestCards = ({ data }) => {
           {data.date} at {formatTime(data.time)}
         </span>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <button className="px-8 py-2 inline-flex text-s leading-5 font-semibold rounded-full bg-green-100 hover:bg-green-200 text-green-800 mr-3">
-          Accept
-        </button>
-        <button className="px-8 py-2 inline-flex text-s leading-5 font-semibold rounded-full bg-red-100 hover:bg-red-200 text-red-800">
-          Decline
-        </button>
-      </td>
+      <td className="px-6 py-4 whitespace-nowrap">{renderButtons()}</td>
     </tr>
   );
 };
