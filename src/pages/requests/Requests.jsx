@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import RequestCards from "./RequestCards";
 import AcceptedRequestCard from "./AcceptedRequestCard";
 import { db } from "../../firebase";
+import { useAuth } from "../../contexts/AuthContext";
 const Requests = () => {
   // changes the <html> bgColor on mount
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#ffffff";
   }, []);
+  const { currentUser } = useAuth();
   const [rideStatus, setRideStatus] = useState("On My Way");
   const [requestsData, setRequestsData] = useState([]);
+  const [rideRequest, setRideRequest] = useState({});
 
   const ref = db.collection("Requests");
   function getRequests() {
@@ -22,14 +25,15 @@ const Requests = () => {
   }
   useEffect(() => {
     getRequests();
+    persistRequest();
   }, []);
 
-  const rideRequest = {
-    time: "01/22/33 at 10:30am",
-    rideStatus: rideStatus,
-    name: "Smol Boi",
-    destination: "Large Hospital, Mippississi",
-    riderAddress: "Smol House place thing",
+  const acceptRequest = (id) => {
+    const request = requestsData.find((obj) => {
+      return obj.id === id;
+    });
+    db.collection("Requests").doc(id).update({ driver: currentUser.email });
+    setRideRequest(request);
   };
 
   const handleStatusChange = (button) => {
@@ -47,14 +51,32 @@ const Requests = () => {
       }
     }
   };
+  const persistRequest = () => {
+    const item = [];
+    ref.where("driver", "==", currentUser.email).onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        item.push({ ...doc.data(), id: doc.id });
+      });
+      const reduceditem = arrayToObject(item);
+      setRideRequest(reduceditem);
+    });
+  };
+
+  const arrayToObject = (arr) =>
+    arr.reduce((obj, item) => {
+      obj = item;
+      return obj;
+    }, {});
 
   return (
     <div className="flex flex-col">
       <div className="my-8 mx-6 text-center">
-        <AcceptedRequestCard
-          request={rideRequest}
-          handleClick={handleStatusChange}
-        />
+        {Object.keys(rideRequest).length !== 0 && (
+          <AcceptedRequestCard
+            ride={rideRequest}
+            handleClick={handleStatusChange}
+          />
+        )}
       </div>
       <h2 className="mt-6 text-center text-4xl font-medium ml-3 mb-4 text-gray-900 flex justify-left ">
         Requests
@@ -91,7 +113,12 @@ const Requests = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {requestsData.map((data) => (
-                  <RequestCards key={data.id} data={data} />
+                  <RequestCards
+                    key={data.id}
+                    data={data}
+                    acceptRequest={acceptRequest}
+                    disableButton={Object.keys(rideRequest).length !== 0}
+                  />
                 ))}
               </tbody>
             </table>
