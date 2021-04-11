@@ -16,8 +16,8 @@ const UserDashboard = () => {
     return currentRequest === undefined;
   };
 
-  const handleClick = () => {
-    console.log("kleek");
+  const handleCancel = () => {
+    console.log();
   };
 
   const RenderRideDetails = () => {
@@ -26,7 +26,7 @@ const UserDashboard = () => {
         {hasCurrentRide() ? (
           <RequestRideButton />
         ) : (
-          <CurrentRequest ride={currentRequest} handleClick={handleClick} />
+          <CurrentRequest ride={currentRequest} handleCancel={handleCancel} />
         )}
       </div>
     );

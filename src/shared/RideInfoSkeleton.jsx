@@ -9,7 +9,11 @@ const RideInfoSkeleton = ({
   riderAddress,
   rideInfo,
   isDriver,
-  handleClick,
+  handleEdit,
+  handleCancel,
+  handleArrived,
+  handleEnRoute,
+  handleWaiting,
 }) => {
   // Drivers and users have different info rideInfo
   const renderRideInfo = Object.entries(rideInfo).map(([key, value]) => {
@@ -38,10 +42,14 @@ const RideInfoSkeleton = ({
   const driverButtons = () => {
     return (
       <div className="flex justify-center mb-2">
-        <CardButton handleClick={handleClick} text="Arrived" color="green" />
-        <CardButton handleClick={handleClick} text="En route" color="yellow" />
-        <CardButton handleClick={handleClick} text="Waiting" color="yellow" />
-        <CardButton handleClick={handleClick} text="Cancel" color="red" />
+        <CardButton handleClick={handleArrived} text="Arrived" color="green" />
+        <CardButton
+          handleClick={handleEnRoute}
+          text="En route"
+          color="yellow"
+        />
+        <CardButton handleClick={handleWaiting} text="Waiting" color="yellow" />
+        <CardButton handleClick={handleCancel} text="Cancel" color="red" />
       </div>
     );
   };
@@ -50,13 +58,13 @@ const RideInfoSkeleton = ({
     return (
       <div className="flex justify-center mb-2">
         <CardButton
-          handleClick={handleClick}
+          handleClick={handleEdit}
           id="edit"
           text="Edit Ride"
           color="blue"
         />
         <CardButton
-          handleClick={handleClick}
+          handleClick={handleCancel}
           id="cancel"
           text="Cancel Ride"
           color="red"

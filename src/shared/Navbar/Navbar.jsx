@@ -6,6 +6,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import NavLink from "./NavLink.jsx";
 import firebase from "firebase";
 import { db } from "../../firebase";
+import useFetchRequests from "../../hooks/useFetchRequests";
+import useIsDriver from "../../hooks/useIsDriver";
 
 const Navbar = () => (
   <div className="relative bg-primaryBlue">
@@ -45,7 +47,9 @@ const LogOutButton = () => {
 
   return (
     <div className="ml-8 whitespace-nowrap text-base font-medium text-white hover:text-gray-200">
-      <Link to="" onClick={handleLogout}>Log Out</Link>
+      <Link to="" onClick={handleLogout}>
+        Log Out
+      </Link>
     </div>
   );
 };
@@ -54,6 +58,8 @@ const Links = () => {
   const { isLoggedIn } = useAuth("false");
   const [persona, setPersona] = useState("passenger");
   const currentUser = firebase.auth().currentUser;
+  const { isDriver } = useIsDriver();
+  const { currentRequest } = useFetchRequests(isDriver);
 
   if (isLoggedIn === false) {
     return (
@@ -83,7 +89,9 @@ const Links = () => {
     if (persona === "passenger") {
       return (
         <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
-          <NavLink linkName="Request Ride" linkDestination="/request" />
+          {!currentRequest && (
+            <NavLink linkName="Request Ride" linkDestination="/request" />
+          )}
           <NavLink linkName="Dashboard" linkDestination="/dashboard" />
           <LogOutButton />
         </div>
