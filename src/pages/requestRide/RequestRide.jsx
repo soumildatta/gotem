@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
+import useFetchRequests from "../../hooks/useFetchRequests";
+import useIsDriver from "../../hooks/useIsDriver";
 
 // there's too much stuff in this file, should probably be broken out into separate components (but who cares tbh)
 const RequestRide = () => {
   const { currentUser } = useAuth();
+  const { isDriver } = useIsDriver();
+  const { currentRequest } = useFetchRequests(isDriver);
 
   const [input, setInput] = useState({
     location: "",
@@ -20,8 +24,9 @@ const RequestRide = () => {
     history.push("/dashboard");
   };
 
-  const hasEmptyInput = () => {
+  const hasProperInput = () => {
     return (
+      !currentRequest &&
       input.location !== "" &&
       input.hospital !== "" &&
       input.date !== "" &&
@@ -31,7 +36,7 @@ const RequestRide = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (hasEmptyInput()) {
+    if (hasProperInput()) {
       db.collection("Requests")
         .add({
           user: currentUser.email,
@@ -153,8 +158,13 @@ const RequestRide = () => {
                 Cancel
               </button>
               <button
+                disabled={Boolean(currentRequest)}
                 type="submit"
-                className="group relative w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 my-2 ml-2"
+                className={`group relative w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
+                  Boolean(currentRequest) ? "bg-gray-400" : "bg-blue-500"
+                } ${
+                  !Boolean(currentRequest) && "hover:bg-blue-700"
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 my-2 ml-2`}
               >
                 Submit
               </button>

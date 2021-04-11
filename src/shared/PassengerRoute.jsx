@@ -3,12 +3,10 @@ import useIsDriver from "../hooks/useIsDriver";
 import { useAuth } from "../contexts/AuthContext";
 import { Route, Redirect, useHistory } from "react-router-dom";
 
-
 export default function PassengerRoute({ component: Component, ...rest }) {
   const { isDriver } = useIsDriver();
   const { isLoggedIn } = useAuth();
   const history = useHistory();
-  
 
   if (Boolean(localStorage.getItem("redirect"))) {
     const location = localStorage.getItem("redirect");
@@ -16,7 +14,7 @@ export default function PassengerRoute({ component: Component, ...rest }) {
     history.push(location);
   }
 
-  if (!isLoggedIn){
+  if (!isLoggedIn) {
     return (
       <Route
         {...rest}
@@ -34,9 +32,13 @@ export default function PassengerRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props => {
-        return !isDriver ? <Component {...props} /> : <Redirect to="/requests" />
+      render={(props) => {
+        return !isDriver ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/requests" />
+        );
       }}
     ></Route>
-  )
+  );
 }

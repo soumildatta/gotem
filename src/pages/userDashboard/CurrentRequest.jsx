@@ -1,7 +1,7 @@
 import React from "react";
 import RideInfoSkeleton from "../../shared/RideInfoSkeleton";
 
-const CurrentRequest = ({ ride, handleClick }) => {
+const CurrentRequest = ({ ride, handleCancel, handleEdit }) => {
   const rideInfo = {
     status: ride.status,
     time: { date: ride.date, time: ride.time },
@@ -13,7 +13,8 @@ const CurrentRequest = ({ ride, handleClick }) => {
       title="Current Request"
       destination={ride.hospital}
       rideInfo={rideInfo}
-      handleClick={handleClick}
+      handleCancel={handleCancel}
+      handleEdit={handleEdit}
     />
   );
 };
