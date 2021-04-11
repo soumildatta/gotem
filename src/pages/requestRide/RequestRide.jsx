@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
+import { useLocation } from "react-router-dom";
 import useFetchRequests from "../../hooks/useFetchRequests";
 import useIsDriver from "../../hooks/useIsDriver";
 
 // there's too much stuff in this file, should probably be broken out into separate components (but who cares tbh)
 const RequestRide = () => {
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  const query = useQuery();
+  const isEditMode = query.get("edit") === "true";
+
   const { currentUser } = useAuth();
   const { isDriver } = useIsDriver();
   const { currentRequest } = useFetchRequests(isDriver);
@@ -19,14 +26,28 @@ const RequestRide = () => {
     time: "",
   });
 
+  useEffect(() => {
+    if (isEditMode) {
+      setInput({
+        location: currentRequest.location,
+        hospital: currentRequest.hospital,
+        info: currentRequest.info,
+        date: currentRequest.date,
+        time: currentRequest.time,
+      });
+    }
+  }, [currentRequest, isEditMode]);
+
   const history = useHistory();
   const goToDashboard = () => {
     history.push("/dashboard");
   };
 
   const hasProperInput = () => {
+    if (!isEditMode && Boolean(currentRequest)) {
+      return false;
+    }
     return (
-      !currentRequest &&
       input.location !== "" &&
       input.hospital !== "" &&
       input.date !== "" &&
@@ -37,6 +58,13 @@ const RequestRide = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (hasProperInput()) {
+      db.collection("Requests")
+        .doc(currentRequest.id)
+        .delete()
+        .catch(() => {
+          window.location.reload();
+        });
+
       db.collection("Requests")
         .add({
           user: currentUser.email,
@@ -74,6 +102,7 @@ const RequestRide = () => {
                 defaultValue=""
                 name="info"
                 id="info"
+                value={input.info}
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               >
                 <optgroup label="Info">
@@ -94,6 +123,7 @@ const RequestRide = () => {
                 onChange={(e) =>
                   setInput({ ...input, location: e.target.value })
                 }
+                value={input.location}
                 id="your-location"
                 name="location"
                 type="text"
@@ -109,6 +139,7 @@ const RequestRide = () => {
                 onChange={(e) =>
                   setInput({ ...input, hospital: e.target.value })
                 }
+                value={input.hospital}
                 defaultValue=""
                 name="available-hospitals"
                 id="available-hospitals"
@@ -129,6 +160,7 @@ const RequestRide = () => {
               <div className="w-full mr-2 min-w-min">
                 <label htmlFor="date">Ride Date:</label>
                 <input
+                  value={input.date}
                   required
                   onChange={(e) => setInput({ ...input, date: e.target.value })}
                   type="date"
@@ -139,6 +171,7 @@ const RequestRide = () => {
               <div className="w-full md:ml-2 min-w-min">
                 <label htmlFor="time">Ride Time:</label>
                 <input
+                  value={input.time}
                   required
                   onChange={(e) => setInput({ ...input, time: e.target.value })}
                   type="time"
@@ -158,12 +191,15 @@ const RequestRide = () => {
                 Cancel
               </button>
               <button
-                disabled={Boolean(currentRequest)}
+                disabled={!isEditMode && Boolean(currentRequest)}
                 type="submit"
                 className={`group relative w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
-                  Boolean(currentRequest) ? "bg-gray-400" : "bg-blue-500"
+                  !isEditMode && Boolean(currentRequest)
+                    ? "bg-gray-400"
+                    : "bg-blue-500"
                 } ${
-                  !Boolean(currentRequest) && "hover:bg-blue-700"
+                  (!Boolean(currentRequest) || isEditMode) &&
+                  "hover:bg-blue-700"
                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 my-2 ml-2`}
               >
                 Submit

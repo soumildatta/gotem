@@ -60,9 +60,12 @@ const Persona = () => {
   return (
     <div className="md:flex items-center justify-end md:flex-1 lg:w-0 text-white">
       {!currentRequest && (
-        <NavLink linkName="Request Ride" linkDestination="/request" />
+        <>
+          <NavLink linkName="Request Ride" linkDestination="/request" />
+          <NavLink linkName="Dashboard" linkDestination="/dashboard" />
+        </>
       )}
-      <NavLink linkName="Dashboard" linkDestination="/dashboard" />
+
       <LogOutButton />
     </div>
   );

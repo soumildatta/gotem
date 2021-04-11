@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import UserRequestCards from "./UserRequestCards";
 import CurrentRequest from "./CurrentRequest";
 import RequestRideButton from "./RequestRideButton";
 import ThEdgeAligned from "../../shared/ThEdgeAligned";
 import useFetchRequests from "../../hooks/useFetchRequests";
+import { db } from "../../firebase";
 
 const UserDashboard = () => {
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#ffffff";
   }, []);
+  const history = useHistory();
 
   const { requests, currentRequest } = useFetchRequests({ isDriver: false });
 
@@ -17,7 +20,16 @@ const UserDashboard = () => {
   };
 
   const handleCancel = () => {
-    console.log();
+    db.collection("Requests")
+      .doc(currentRequest.id)
+      .delete()
+      .catch(() => {
+        window.location.reload();
+      });
+  };
+
+  const handleEdit = () => {
+    history.push("/request?edit=true");
   };
 
   const RenderRideDetails = () => {
@@ -26,7 +38,11 @@ const UserDashboard = () => {
         {hasCurrentRide() ? (
           <RequestRideButton />
         ) : (
-          <CurrentRequest ride={currentRequest} handleCancel={handleCancel} />
+          <CurrentRequest
+            ride={currentRequest}
+            handleCancel={handleCancel}
+            handleEdit={handleEdit}
+          />
         )}
       </div>
     );
