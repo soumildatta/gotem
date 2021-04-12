@@ -4,7 +4,7 @@ import RideInfoSkeleton from "../../shared/RideInfoSkeleton";
 const AcceptedRequestCard = ({ ride, handleClick }) => {
   const rideInfo = {
     time: { date: ride.date, time: ride.time },
-    name: ride.passenger,
+    name: ride.passengerName,
     status: ride.status,
   };
 
