@@ -3,9 +3,16 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   // changes the <html> bgColor on mount
+  const shouldRefresh = Boolean(localStorage.getItem("reset"));
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#428FD7";
   }, []);
+  useEffect(() => {
+    if (shouldRefresh) {
+      localStorage.removeItem("reset");
+      window.location.reload();
+    }
+  }, [shouldRefresh]);
   return (
     <div className="relative bg-primaryBlue overflow-hidden">
       <div className="max-w-7xl mx-auto">

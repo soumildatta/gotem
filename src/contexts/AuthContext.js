@@ -15,10 +15,10 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(currentUser));
 
   function signup(email, password, personav) {
-   auth.createUserWithEmailAndPassword(email, password).then(cred =>{
-     return db.collection('Users').doc(cred.user.email).set({
-       persona: personav
-     })
+    auth.createUserWithEmailAndPassword(email, password).then((cred) => {
+      return db.collection("Users").doc(cred.user.email).set({
+        persona: personav,
+      });
     });
   }
 
@@ -27,7 +27,6 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    localStorage.setItem('refresh', 'true');
     return auth.signOut();
   }
 
