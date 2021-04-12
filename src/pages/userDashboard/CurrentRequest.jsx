@@ -5,7 +5,7 @@ const CurrentRequest = ({ ride, handleCancel, handleEdit }) => {
   const rideInfo = {
     status: ride.status,
     time: { date: ride.date, time: ride.time },
-    driver: ride.driver,
+    driver: ride.driverName,
   };
 
   return (

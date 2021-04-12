@@ -32,7 +32,12 @@ const Requests = () => {
     const request = requestsData.find((obj) => {
       return obj.id === id;
     });
-    db.collection("Requests").doc(id).update({ driver: currentUser.email });
+    db.collection("Requests")
+      .doc(id)
+      .update({
+        driver: currentUser.email,
+        driverName: currentUser.displayName,
+      });
     setRideRequest(request);
   };
 

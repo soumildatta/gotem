@@ -58,16 +58,19 @@ const RequestRide = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (hasProperInput()) {
-      db.collection("Requests")
-        .doc(currentRequest.id)
-        .delete()
-        .catch(() => {
-          window.location.reload();
-        });
+      if (isEditMode) {
+        db.collection("Requests")
+          .doc(currentRequest.id)
+          .delete()
+          .catch(() => {
+            window.location.reload();
+          });
+      }
 
       db.collection("Requests")
         .add({
           user: currentUser.email,
+          passengerName: currentUser.displayName,
           location: input.location,
           hospital: input.hospital,
           info: input.info,
@@ -76,7 +79,7 @@ const RequestRide = () => {
           completed: false,
           driver: "",
           status: "",
-          price: "",
+          price: 10,
         })
         .catch((error) => {
           // prolly need a better way to handle the errors. or we could just make the users open up the console ya know

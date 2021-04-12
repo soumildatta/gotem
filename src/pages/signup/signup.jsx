@@ -8,6 +8,7 @@ import { useAuth } from "../../contexts/AuthContext";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [persona, setPersona] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ const Signup = () => {
     try {
       setError("");
       setLoading(true);
-      await signup(email, password, persona);
+      await signup(email, name, password, persona);
       if (persona === "passenger") {
         localStorage.setItem("redirect", "/dashboard");
       } else {
@@ -50,6 +51,11 @@ const Signup = () => {
         fieldName="email"
         round="top"
         type="email"
+      />
+      <Input
+        onChange={(e) => setName(e.target.value)}
+        fieldName="name"
+        type="text"
       />
       <Input
         onChange={(e) => setPassword(e.target.value)}
