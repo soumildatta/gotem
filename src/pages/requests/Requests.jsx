@@ -3,6 +3,7 @@ import RequestCards from "./RequestCards";
 import AcceptedRequestCard from "./AcceptedRequestCard";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
+
 const Requests = () => {
   // changes the <html> bgColor on mount
   useEffect(() => {
@@ -14,6 +15,7 @@ const Requests = () => {
   const [rideRequest, setRideRequest] = useState({});
 
   const ref = db.collection("Requests");
+
   function getRequests() {
     ref.onSnapshot((querySnapshot) => {
       const items = [];
@@ -37,6 +39,20 @@ const Requests = () => {
       driverName: currentUser.displayName,
     });
     setRideRequest(request);
+  };
+
+  const handleCancel = () => {
+    if (window.confirm(`Delete ride by ${rideRequest.passengerName}?`)) {
+      db.collection("Requests")
+        .doc(rideRequest.id)
+        .delete()
+        .catch(() => {
+          window.location.reload();
+        })
+        .then(() => {
+          setRideRequest({});
+        });
+    }
   };
 
   const handleStatusChange = (button) => {
@@ -78,6 +94,7 @@ const Requests = () => {
           <AcceptedRequestCard
             ride={rideRequest}
             handleClick={handleStatusChange}
+            handleCancel={handleCancel}
           />
         )}
       </div>
