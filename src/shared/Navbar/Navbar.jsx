@@ -39,6 +39,7 @@ const LogOutButton = () => {
     setError("");
     try {
       await logout();
+      localStorage.setItem("reset", "true");
       history.push("/");
     } catch {
       setError("Failed to log out");
