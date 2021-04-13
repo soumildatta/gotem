@@ -48,17 +48,20 @@ const Signup = () => {
       <input type="hidden" name="remember" value="true" />
       <Input
         onChange={(e) => setEmail(e.target.value)}
+        required
         fieldName="email"
         round="top"
         type="email"
       />
       <Input
         onChange={(e) => setName(e.target.value)}
+        required
         fieldName="name"
         type="text"
       />
       <Input
         onChange={(e) => setPassword(e.target.value)}
+        required
         fieldName="password"
         round="bottom"
         type="password"
