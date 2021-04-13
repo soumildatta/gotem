@@ -45,9 +45,9 @@ const Requests = () => {
     if (window.confirm(`Delete ride by ${rideRequest.passengerName}?`)) {
       db.collection("Requests")
         .doc(rideRequest.id)
-        .delete()
-        .catch(() => {
-          window.location.reload();
+        .update({
+          driver: "",
+          driverName: "",
         })
         .then(() => {
           setRideRequest({});
