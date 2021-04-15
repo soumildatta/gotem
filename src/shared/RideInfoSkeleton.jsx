@@ -11,6 +11,7 @@ const RideInfoSkeleton = ({
   isDriver,
   handleEdit,
   handleCancel,
+  handleComplete,
   handleArrived,
   handleEnRoute,
   handleWaiting,
@@ -42,14 +43,26 @@ const RideInfoSkeleton = ({
   const driverButtons = () => {
     return (
       <div className="flex justify-center mb-2">
-        <CardButton handleClick={handleArrived} text="Arrived" color="green" />
+        <CardButton 
+          handleClick={handleArrived}
+          text="Arrived" 
+          color="green" 
+        />
         <CardButton
           handleClick={handleEnRoute}
           text="En route"
           color="yellow"
         />
-        <CardButton handleClick={handleWaiting} text="Waiting" color="yellow" />
-        <CardButton handleClick={handleCancel} text="Cancel" color="red" />
+        <CardButton
+          handleClick={handleWaiting}
+          text="Waiting"
+          color="yellow" 
+        />
+        <CardButton
+          handleClick={handleCancel}
+          text="Cancel"
+          color="red" 
+        />
       </div>
     );
   };
@@ -62,6 +75,12 @@ const RideInfoSkeleton = ({
           id="edit"
           text="Edit Ride"
           color="blue"
+        />
+        <CardButton
+          handleClick={handleComplete}
+          id="complete"
+          text="Ride Complete"
+          color="green"
         />
         <CardButton
           handleClick={handleCancel}

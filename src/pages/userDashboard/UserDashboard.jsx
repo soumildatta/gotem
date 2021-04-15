@@ -11,8 +11,8 @@ const UserDashboard = () => {
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#ffffff";
   }, []);
-  const history = useHistory();
 
+  const history = useHistory();
   const { requests, currentRequest } = useFetchRequests({ isDriver: false });
 
   const hasCurrentRide = () => {
@@ -28,8 +28,46 @@ const UserDashboard = () => {
       });
   };
 
+  const handleComplete = () => {
+    let ref = db.collection("Requests").doc(currentRequest.id);
+
+    ref.get().then(function (doc) {
+      if (doc.exists) {
+        if (doc.data().driver !== ""){
+          ref.update({
+            userCompleted: "true",
+          });
+          ref.get().then(function (doc) {
+            if (doc.exists) {
+              if (doc.data().userCompleted === doc.data().driverCompleted){
+                ref.update({
+                  completed: "true"
+                });
+              }
+            }
+          });
+        }
+        else{
+          alert("You don't have a driver yet, so your ride hasn't been completed."
+          + " If you wish to cancel your request, please select 'Cancel Ride' instead.")
+        }
+      }
+    });   
+  };
+
   const handleEdit = () => {
-    history.push("/request?edit=true");
+    let ref = db.collection("Requests").doc(currentRequest.id);
+
+    ref.get().then(function (doc) {
+      if (doc.exists) {
+        if (doc.data().driver === ""){
+          history.push("/request?edit=true");
+        }
+        else{
+          alert("You can't edit your request if a driver has already accepted it.")
+        }
+      }
+    });
   };
 
   const RenderRideDetails = () => {
@@ -42,6 +80,7 @@ const UserDashboard = () => {
             ride={currentRequest}
             handleCancel={handleCancel}
             handleEdit={handleEdit}
+            handleComplete={handleComplete}
           />
         )}
       </div>
