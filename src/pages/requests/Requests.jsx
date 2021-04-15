@@ -5,10 +5,10 @@ import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Requests = () => {
-  // changes the <html> bgColor on mount
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#ffffff";
   }, []);
+
   const { currentUser } = useAuth();
   const [rideStatus, setRideStatus] = useState("On My Way");
   const [requestsData, setRequestsData] = useState([]);
@@ -41,6 +41,24 @@ const Requests = () => {
     setRideRequest(request);
   };
 
+  const handleArrived = () => {
+    let ref = db.collection("Requests").doc(rideRequest.id);
+
+    ref.update({
+        driverCompleted: "true",
+    });
+
+    ref.get().then(function (doc) {
+      if (doc.exists) {
+          if (doc.data().userCompleted ===doc.data().driverCompleted){
+            ref.update({
+              completed: "true"
+            });
+          }
+      }
+    }); 
+  };
+
   const handleCancel = () => {
     if (window.confirm(`Delete ride by ${rideRequest.passengerName}?`)) {
       db.collection("Requests")
@@ -70,6 +88,7 @@ const Requests = () => {
       }
     }
   };
+
   const persistRequest = () => {
     const item = [];
     ref.where("driver", "==", currentUser.email).onSnapshot((querySnapshot) => {
@@ -94,6 +113,7 @@ const Requests = () => {
           <AcceptedRequestCard
             ride={rideRequest}
             handleClick={handleStatusChange}
+            handleArrived={handleArrived}
             handleCancel={handleCancel}
           />
         )}
