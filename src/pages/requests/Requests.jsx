@@ -42,21 +42,24 @@ const Requests = () => {
   };
 
   const handleArrived = () => {
-    let ref = db.collection("Requests").doc(rideRequest.id);
+    if (window.confirm(`Please confirm arrival.`)) {
+      const ref = db.collection("Requests").doc(rideRequest.id);
 
-    ref.update({
+      ref.update({
+        status: "Arrived",
         driverCompleted: "true",
-    });
+      });
 
-    ref.get().then(function (doc) {
-      if (doc.exists) {
-          if (doc.data().userCompleted ===doc.data().driverCompleted){
+      ref.get().then(function (doc) {
+        if (doc.exists) {
+          if (doc.data().userCompleted === doc.data().driverCompleted) {
             ref.update({
-              completed: "true"
+              completed: "true",
             });
           }
-      }
-    }); 
+        }
+      });
+    }
   };
 
   const handleCancel = () => {
@@ -66,11 +69,24 @@ const Requests = () => {
         .update({
           driver: "",
           driverName: "",
+          status: "",
         })
         .then(() => {
           setRideRequest({});
         });
     }
+  };
+
+  const handleWaiting = () => {
+    db.collection("Requests").doc(rideRequest.id).update({
+      status: "Waiting",
+    });
+  };
+
+  const handleEnRoute = () => {
+    db.collection("Requests").doc(rideRequest.id).update({
+      status: "En Route",
+    });
   };
 
   const handleStatusChange = (button) => {
@@ -115,6 +131,9 @@ const Requests = () => {
             handleClick={handleStatusChange}
             handleArrived={handleArrived}
             handleCancel={handleCancel}
+            handleWaiting={handleWaiting}
+            handleEnRoute={handleEnRoute}
+            handleArrived={handleArrived}
           />
         )}
       </div>
