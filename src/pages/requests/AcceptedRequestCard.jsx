@@ -1,7 +1,14 @@
 import React from "react";
 import RideInfoSkeleton from "../../shared/RideInfoSkeleton";
 
-const AcceptedRequestCard = ({ ride, handleClick, handleArrived, handleCancel }) => {
+const AcceptedRequestCard = ({
+  ride,
+  handleClick,
+  handleCancel,
+  handleWaiting,
+  handleEnRoute,
+  handleArrived,
+}) => {
   const rideInfo = {
     time: { date: ride.date, time: ride.time },
     name: ride.passengerName,
@@ -18,6 +25,8 @@ const AcceptedRequestCard = ({ ride, handleClick, handleArrived, handleCancel })
         handleClick={handleClick}
         handleArrived={handleArrived}
         handleCancel={handleCancel}
+        handleWaiting={handleWaiting}
+        handleEnRoute={handleEnRoute}
         isDriver
       />
     </div>

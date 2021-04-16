@@ -98,28 +98,6 @@ const RequestRide = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-0 space-y-6">
-            <div className="flex flex-col">
-              <label htmlFor="info">Info:</label>
-              <select
-                onChange={(e) => setInput({ ...input, info: e.target.value })}
-                defaultValue=""
-                name="info"
-                id="info"
-                value={input.info}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-              >
-                <optgroup label="Info">
-                  <option value="" disabled>
-                    (Optional)
-                  </option>
-                  <option value="fine">I'm probably fine</option>
-                  <option value="not">I'm not fine</option>
-                  <option value="dying">I'm probably dying</option>
-                  <option value="definite">I'm definitely dying</option>
-                  <option value="dead">I'm already dead</option>
-                </optgroup>
-              </select>
-            </div>
             <div>
               <label htmlFor="your-location">Your location</label>
               <input
@@ -152,9 +130,27 @@ const RequestRide = () => {
                   <option value="" disabled>
                     (Required)
                   </option>
-                  <option value="bruh">bruh hospital</option>
-                  <option value="emerge">emergen-c hospital</option>
-                  <option value="uh">uh oh wrong arm hospital</option>
+                  <option value="Oxford Hospital">Oxford Hospital</option>
+                  <option value="Baptist Memorial Hospital">
+                    Baptist Memorial Hospital
+                  </option>
+                  <option value="ABC Kidz Clinic">ABC Kidz Clinic</option>
+                  <option value="Urget Care Clinic of Oxford">
+                    Urget Care Clinic of Oxford
+                  </option>
+                  <option value="Ross Family Dental">Ross Family Dental</option>
+                  <option value="Walmart Vision Center">
+                    Walmart Vision Center
+                  </option>
+                  <option value="Oxford Family Clinic">
+                    Oxford Family Clinic
+                  </option>
+                  <option value="University Health Services">
+                    University Health Services
+                  </option>
+                  <option value="Endurance Physical Therapy">
+                    Endurance Physical Therapy
+                  </option>
                 </optgroup>
               </select>
             </div>
