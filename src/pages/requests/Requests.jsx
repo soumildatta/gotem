@@ -17,7 +17,7 @@ const Requests = () => {
   const ref = db.collection("Requests");
 
   function getRequests() {
-    ref.onSnapshot((querySnapshot) => {
+    ref.where("driver", "==", "").onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push({ ...doc.data(), id: doc.id });
@@ -39,6 +39,13 @@ const Requests = () => {
       driverName: currentUser.displayName,
     });
     setRideRequest(request);
+
+    // remove accepted request from current list
+    setRequestsData(
+      requestsData.filter((obj) => {
+        return obj.id !== id;
+      })
+    );
   };
 
   const handleArrived = () => {
@@ -63,7 +70,7 @@ const Requests = () => {
   };
 
   const handleCancel = () => {
-    if (window.confirm(`Delete ride by ${rideRequest.passengerName}?`)) {
+    if (window.confirm(`Cancel ride by ${rideRequest.passengerName}?`)) {
       db.collection("Requests")
         .doc(rideRequest.id)
         .update({
