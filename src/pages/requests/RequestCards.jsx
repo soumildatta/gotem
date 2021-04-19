@@ -40,8 +40,10 @@ const RequestCards = ({ data, acceptRequest, disableButton }) => {
       <td className="px-4 py-4 whitespace-nowrap">
         <div className="flex items-center">
           <div className="ml-4">
-            <div className="text-sm font-medium text-gray-900">{data.user}</div>
-            <div className="text-sm text-gray-500">{data.info}</div>
+            <div className="text-sm font-medium text-gray-900">
+              {data.passengerName}
+            </div>
+            {/* <div className="text-sm text-gray-500">{data.info}</div> */}
           </div>
         </div>
       </td>

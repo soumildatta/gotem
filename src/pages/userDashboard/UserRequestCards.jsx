@@ -7,7 +7,7 @@ const UserRequestCards = ({ requests }) => {
         <div className="flex items-center">
           <div>
             <div className="text-md font-medium text-gray-900">
-              Driver: {requests.driver}
+              Driver: {requests.driverName}
             </div>
             <div className="text-sm text-gray-500">
               <strong>To: </strong>

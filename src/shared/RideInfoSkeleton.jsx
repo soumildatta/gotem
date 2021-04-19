@@ -16,6 +16,19 @@ const RideInfoSkeleton = ({
   handleEnRoute,
   handleWaiting,
 }) => {
+  const formatTime = (time) => {
+    time = time
+      .toString()
+      .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) {
+      time = time.slice(1);
+      time[5] = +time[0] < 12 ? "AM" : "PM";
+      time[0] = +time[0] % 12 || 12;
+    }
+    return time.join("");
+  };
+
   // Drivers and users have different info rideInfo
   const renderRideInfo = Object.entries(rideInfo).map(([key, value]) => {
     const subtitle = cardHeaders.has(key)
@@ -29,7 +42,7 @@ const RideInfoSkeleton = ({
           <span className="font-semibold">
             {subtitle === "Time" ? (
               <>
-                {value.date} at {value.time}
+                {value.date} at {formatTime(value.time)}
               </>
             ) : (
               <>{value}</>
@@ -43,26 +56,14 @@ const RideInfoSkeleton = ({
   const driverButtons = () => {
     return (
       <div className="flex justify-center mb-2">
-        <CardButton 
-          handleClick={handleArrived}
-          text="Arrived" 
-          color="green" 
-        />
+        <CardButton handleClick={handleArrived} text="Arrived" color="green" />
         <CardButton
           handleClick={handleEnRoute}
           text="En route"
           color="yellow"
         />
-        <CardButton
-          handleClick={handleWaiting}
-          text="Waiting"
-          color="yellow" 
-        />
-        <CardButton
-          handleClick={handleCancel}
-          text="Cancel"
-          color="red" 
-        />
+        <CardButton handleClick={handleWaiting} text="Waiting" color="yellow" />
+        <CardButton handleClick={handleCancel} text="Cancel" color="red" />
       </div>
     );
   };
