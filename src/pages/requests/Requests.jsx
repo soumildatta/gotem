@@ -140,7 +140,6 @@ const Requests = () => {
             handleCancel={handleCancel}
             handleWaiting={handleWaiting}
             handleEnRoute={handleEnRoute}
-            handleArrived={handleArrived}
           />
         )}
       </div>
