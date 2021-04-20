@@ -10,6 +10,7 @@ const Requests = () => {
   }, []);
 
   const { currentUser } = useAuth();
+  const [showRide, setShowRide] = useState(false);
   const [rideStatus, setRideStatus] = useState("On My Way");
   const [requestsData, setRequestsData] = useState([]);
   const [rideRequest, setRideRequest] = useState({});
@@ -35,10 +36,12 @@ const Requests = () => {
       return obj.id === id;
     });
     db.collection("Requests").doc(id).update({
+      status: "",
       driver: currentUser.email,
       driverName: currentUser.displayName,
     });
     setRideRequest(request);
+    setShowRide(true);
 
     // remove accepted request from current list
     setRequestsData(
@@ -63,6 +66,7 @@ const Requests = () => {
             ref.update({
               completed: "true",
             });
+            setShowRide(false);
           }
         }
       });
@@ -80,6 +84,7 @@ const Requests = () => {
         })
         .then(() => {
           setRideRequest({});
+          setShowRide(false);
         });
     }
   };
@@ -132,7 +137,7 @@ const Requests = () => {
   return (
     <div className="flex flex-col">
       <div className="my-8 mx-6 text-center">
-        {Object.keys(rideRequest).length !== 0 && (
+        {showRide === true && (
           <AcceptedRequestCard
             ride={rideRequest}
             handleClick={handleStatusChange}
@@ -182,7 +187,7 @@ const Requests = () => {
                     key={data.id}
                     data={data}
                     acceptRequest={acceptRequest}
-                    disableButton={Object.keys(rideRequest).length !== 0}
+                    disableButton={showRide}
                   />
                 ))}
               </tbody>
