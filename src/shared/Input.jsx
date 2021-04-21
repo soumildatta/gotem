@@ -6,6 +6,8 @@ const Input = ({ onChange, fieldName, type, round, required = false }) => {
       return "rounded-t-md";
     } else if (round === "bottom") {
       return "rounded-b-md";
+    } else if (round === "all") {
+      return "rounded";
     }
     return "";
   };
