@@ -10,12 +10,12 @@ import RequestRide from "./pages/requestRide/RequestRide";
 import UserDashboard from "./pages/userDashboard/UserDashboard";
 import DriverPayments from "./pages/driverPayments/DriverPayments";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
+import ResetPassword from "./pages/forgotPassword/ResetPassword";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
-
   return (
     <AuthProvider>
       <Router>
@@ -27,15 +27,15 @@ function App() {
 
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
+        <Route path="/forgot-password/reset" component={ResetPassword} />
+
         <Route path="/forgot-password" component={ForgotPassword} />
 
-        <DriverRoute path="/requests" component={Requests} />  
+        <DriverRoute path="/requests" component={Requests} />
         <DriverRoute path="/payments" component={DriverPayments} />
 
         <PassengerRoute path="/request" component={RequestRide} />
         <PassengerRoute path="/dashboard" component={UserDashboard} />
-        
-        
       </Router>
     </AuthProvider>
   );
