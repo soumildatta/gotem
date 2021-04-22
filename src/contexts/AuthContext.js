@@ -15,7 +15,8 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(currentUser));
 
   function signup(email, name, password, personav) {
-    auth.createUserWithEmailAndPassword(email, password).then((cred) => {
+    auth.createUserWithEmailAndPassword(email, password)
+    .then((cred) => {
       if (auth.currentUser) {
         cred.user.updateProfile({
           displayName: name,
@@ -24,6 +25,9 @@ export function AuthProvider({ children }) {
       return db.collection("Users").doc(cred.user.email).set({
         persona: personav,
       });
+    })
+    .catch(error => {
+      alert(error.message);
     });
   }
 

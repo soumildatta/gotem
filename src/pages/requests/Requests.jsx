@@ -52,7 +52,7 @@ const Requests = () => {
   };
 
   const handleArrived = () => {
-    if (window.confirm(`Please confirm arrival.`)) {
+    //if (window.confirm(`Please confirm arrival.`)) {
       const ref = db.collection("Requests").doc(rideRequest.id);
 
       ref.update({
@@ -70,7 +70,7 @@ const Requests = () => {
           }
         }
       });
-    }
+    //}
   };
 
   const handleCancel = () => {
