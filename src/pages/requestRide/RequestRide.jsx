@@ -124,12 +124,13 @@ const RequestRide = () => {
                 defaultValue=""
                 name="available-hospitals"
                 id="available-hospitals"
+                required
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               >
+                <option value="" disabled>
+                  (Required)
+                </option>
                 <optgroup label="Available Hospitals">
-                  <option value="" disabled>
-                    (Required)
-                  </option>
                   <option value="Oxford Hospital">Oxford Hospital</option>
                   <option value="Baptist Memorial Hospital">
                     Baptist Memorial Hospital
