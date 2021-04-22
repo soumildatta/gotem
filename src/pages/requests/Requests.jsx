@@ -42,7 +42,6 @@ const Requests = () => {
     });
     setRideRequest(request);
     setShowRide(true);
-
     // remove accepted request from current list
     setRequestsData(
       requestsData.filter((obj) => {
@@ -53,23 +52,23 @@ const Requests = () => {
 
   const handleArrived = () => {
     //if (window.confirm(`Please confirm arrival.`)) {
-      const ref = db.collection("Requests").doc(rideRequest.id);
+    const ref = db.collection("Requests").doc(rideRequest.id);
 
-      ref.update({
-        status: "Arrived",
-        driverCompleted: "true",
-      });
+    ref.update({
+      status: "Arrived",
+      driverCompleted: "true",
+    });
 
-      ref.get().then(function (doc) {
-        if (doc.exists) {
-          if (doc.data().userCompleted === doc.data().driverCompleted) {
-            ref.update({
-              completed: "true",
-            });
-            setShowRide(false);
-          }
+    ref.get().then(function (doc) {
+      if (doc.exists) {
+        if (doc.data().userCompleted === doc.data().driverCompleted) {
+          ref.update({
+            completed: "true",
+          });
+          setShowRide(false);
         }
-      });
+      }
+    });
     //}
   };
 
