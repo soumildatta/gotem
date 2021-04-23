@@ -16,6 +16,7 @@ const Requests = () => {
 
   const ref = db.collection("Requests");
 
+  // retrieve requests from firebase
   function getRequests() {
     ref
       .where("driver", "==", "")
@@ -34,6 +35,7 @@ const Requests = () => {
     persistRequest();
   }, []);
 
+  // updates the document according to the id of the
   const acceptRequest = (id) => {
     const request = requestsData.find((obj) => {
       return obj.id === id;
@@ -99,12 +101,14 @@ const Requests = () => {
     }
   };
 
+  // function called when button is clicked. Updates status to waiting
   const handleWaiting = () => {
     db.collection("Requests").doc(rideRequest.id).update({
       status: "Waiting",
     });
   };
 
+  // function called when button is clicked. Updates status to En Route
   const handleEnRoute = () => {
     db.collection("Requests").doc(rideRequest.id).update({
       status: "En Route",
@@ -124,7 +128,7 @@ const Requests = () => {
       }
     }
   };
-
+  // function to keep accepted ride card persistent on page
   const persistRequest = () => {
     ref
       .where("driver", "==", currentUser.email)
@@ -197,7 +201,7 @@ const Requests = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {requestsData.map((data) => (
-                  <RequestCards
+                  <RequestCards // displays request cards
                     key={data.id}
                     data={data}
                     acceptRequest={acceptRequest}
