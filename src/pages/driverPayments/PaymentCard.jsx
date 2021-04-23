@@ -7,7 +7,7 @@ const PaymentCard = ({ request }) => {
         <div className="flex items-center">
           <div>
             <div className="text-md font-medium text-gray-900">
-              {request.passenger}
+              {request.passengerName}
             </div>
             <div className="text-sm text-gray-500">
               <strong>To: </strong>
