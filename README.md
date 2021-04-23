@@ -13,4 +13,5 @@ The steps to set up this web application to run on your local machine is simple:
 
 4. After this, you are ready to run the application on your computer with this command (in the project directory):
 ##### `npm start`  <br/>
-Open [http://localhost:3000](http://localhost:3000) to then view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to then view it in the browser. <br/>
+**Note**: This project is meant to be run on Google Chrome or Mozilla Firefox browsers.
