@@ -20,39 +20,44 @@ const UserDashboard = () => {
   };
 
   const handleCancel = () => {
-    db.collection("Requests")
-      .doc(currentRequest.id)
-      .delete()
-      .catch(() => {
-        window.location.reload();
-      });
+    if (window.confirm("Please confirm ride cancellation.")) {
+      db.collection("Requests")
+        .doc(currentRequest.id)
+        .delete()
+        .catch(() => {
+          window.location.reload();
+        });
+    }
   };
 
   const handleComplete = () => {
-    let ref = db.collection("Requests").doc(currentRequest.id);
+    if (window.confirm("Please confirm that the ride is completed.")) {
+      let ref = db.collection("Requests").doc(currentRequest.id);
 
-    ref.get().then(function (doc) {
-      if (doc.exists) {
-        if (doc.data().driver !== ""){
-          ref.update({
-            userCompleted: "true",
-          });
-          ref.get().then(function (doc) {
-            if (doc.exists) {
-              if (doc.data().userCompleted === doc.data().driverCompleted){
-                ref.update({
-                  completed: "true"
-                });
+      ref.get().then(function (doc) {
+        if (doc.exists) {
+          if (doc.data().driver !== "") {
+            ref.update({
+              userCompleted: "true",
+            });
+            ref.get().then(function (doc) {
+              if (doc.exists) {
+                if (doc.data().userCompleted === doc.data().driverCompleted) {
+                  ref.update({
+                    completed: "true",
+                  });
+                }
               }
-            }
-          });
+            });
+          } else {
+            alert(
+              "You don't have a driver yet, so your ride hasn't been completed." +
+                " If you wish to cancel your request, please select 'Cancel Ride' instead."
+            );
+          }
         }
-        else{
-          alert("You don't have a driver yet, so your ride hasn't been completed."
-          + " If you wish to cancel your request, please select 'Cancel Ride' instead.")
-        }
-      }
-    });   
+      });
+    }
   };
 
   const handleEdit = () => {
@@ -60,11 +65,12 @@ const UserDashboard = () => {
 
     ref.get().then(function (doc) {
       if (doc.exists) {
-        if (doc.data().driver === ""){
+        if (doc.data().driver === "") {
           history.push("/request?edit=true");
-        }
-        else{
-          alert("You can't edit your request if a driver has already accepted it.")
+        } else {
+          alert(
+            "You can't edit your request if a driver has already accepted it."
+          );
         }
       }
     });
