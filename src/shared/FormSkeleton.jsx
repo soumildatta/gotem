@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../shared/logo_v1.png";
 import { Link } from "react-router-dom";
 
+//basic format of all forms used throughout the site
 const FormSkeleton = ({
   children,
   text,

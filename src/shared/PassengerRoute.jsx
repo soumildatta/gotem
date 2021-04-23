@@ -3,6 +3,7 @@ import useIsDriver from "../hooks/useIsDriver";
 import { useAuth } from "../contexts/AuthContext";
 import { Route, Redirect, useHistory } from "react-router-dom";
 
+/* PassengerRoutes are protected routes that only logged in passengers can access */
 export default function PassengerRoute({ component: Component, ...rest }) {
   const { isDriver } = useIsDriver();
   const { isLoggedIn } = useAuth();
@@ -14,6 +15,7 @@ export default function PassengerRoute({ component: Component, ...rest }) {
     history.push(location);
   }
 
+  //if no user is logged in, redirect them to the signin page
   if (!isLoggedIn) {
     return (
       <Route
@@ -29,6 +31,8 @@ export default function PassengerRoute({ component: Component, ...rest }) {
     );
   }
 
+  //only render page is logged in user is a passenger
+  //if logged in user is not a passenger (i.e a driver), redirect to driver requests page
   return (
     <Route
       {...rest}

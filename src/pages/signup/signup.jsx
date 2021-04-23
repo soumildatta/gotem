@@ -14,6 +14,8 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
 
   const { signup } = useAuth();
+
+  //function to handle submit of signup form
   async function handleSubmit(e) {
     e.preventDefault();
 
