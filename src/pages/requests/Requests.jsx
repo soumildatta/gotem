@@ -10,7 +10,6 @@ const Requests = () => {
   }, []);
 
   const { currentUser } = useAuth();
-  const [showRide, setShowRide] = useState(false);
   const [rideStatus, setRideStatus] = useState("On My Way");
   const [requestsData, setRequestsData] = useState([]);
   const [rideRequest, setRideRequest] = useState({});
@@ -41,7 +40,7 @@ const Requests = () => {
       driverName: currentUser.displayName,
     });
     setRideRequest(request);
-    setShowRide(true);
+
     // remove accepted request from current list
     setRequestsData(
       requestsData.filter((obj) => {
@@ -51,7 +50,6 @@ const Requests = () => {
   };
 
   const handleArrived = () => {
-    //if (window.confirm(`Please confirm arrival.`)) {
     const ref = db.collection("Requests").doc(rideRequest.id);
 
     ref.update({
@@ -61,11 +59,11 @@ const Requests = () => {
 
     ref.get().then(function (doc) {
       if (doc.exists) {
-        if (doc.data().userCompleted === doc.data().driverCompleted) {
+        if (doc.data().userCompleted === "true" && doc.data().driverCompleted === "true") {
           ref.update({
             completed: "true",
           });
-          setShowRide(false);
+          setRideRequest({});
         }
       }
     });
@@ -83,7 +81,6 @@ const Requests = () => {
         })
         .then(() => {
           setRideRequest({});
-          setShowRide(false);
         });
     }
   };
@@ -104,10 +101,8 @@ const Requests = () => {
     if (button !== "Cancel") {
       if (window.confirm(`Change status to "${button}"?`)) {
         setRideStatus(button);
-        // firestore stuff here
       }
     } else {
-      // Request is cancelled by driver ??
       if (
         window.confirm("Are you sure you want to cancel this user's request?")
       ) {
@@ -136,7 +131,7 @@ const Requests = () => {
   return (
     <div className="flex flex-col">
       <div className="my-8 mx-6 text-center">
-        {showRide === true && (
+        {Object.keys(rideRequest).length !== 0 && rideRequest.completed === false && (
           <AcceptedRequestCard
             ride={rideRequest}
             handleClick={handleStatusChange}
@@ -186,7 +181,7 @@ const Requests = () => {
                     key={data.id}
                     data={data}
                     acceptRequest={acceptRequest}
-                    disableButton={showRide}
+                    disableButton={Object.keys(rideRequest).length !== 0 && rideRequest.completed === false}
                   />
                 ))}
               </tbody>
