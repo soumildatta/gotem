@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 import useFetchRequests from "../../hooks/useFetchRequests";
 import useIsDriver from "../../hooks/useIsDriver";
 
-// there's too much stuff in this file, should probably be broken out into separate components (but who cares tbh)
 const RequestRide = () => {
   function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -26,6 +25,7 @@ const RequestRide = () => {
     time: "",
   });
 
+  // if the user arrived at the page through the edit button, then display the items from the current request inside the input fields
   useEffect(() => {
     if (isEditMode) {
       setInput({
@@ -55,9 +55,11 @@ const RequestRide = () => {
     );
   };
 
+  // function called when the submit button clicked
   const handleSubmit = (e) => {
     e.preventDefault();
     if (hasProperInput()) {
+      // if user is editing a current request, remove the request and create a new one (will not affect driver becauase no driver assigned yet)
       if (isEditMode) {
         db.collection("Requests")
           .doc(currentRequest.id)
@@ -67,13 +69,13 @@ const RequestRide = () => {
           });
       }
 
+      // store the values from the input fields in firebase
       db.collection("Requests")
         .add({
           user: currentUser.email,
           passengerName: currentUser.displayName,
           location: input.location,
           hospital: input.hospital,
-          info: input.info,
           date: input.date,
           time: input.time,
           completed: false,
@@ -81,14 +83,17 @@ const RequestRide = () => {
           status: "",
           price: 10,
         })
+        .then(() => {
+          // After the items have been stored, return to dashboard
+          goToDashboard();
+        })
         .catch((error) => {
-          // prolly need a better way to handle the errors. or we could just make the users open up the console ya know
           console.error("error occured: ", error);
         });
     }
-    goToDashboard();
   };
 
+  // html for displaying the page
   return (
     <div className="min-h-screen -mt-20 flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl w-full space-y-10">

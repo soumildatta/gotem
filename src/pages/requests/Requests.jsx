@@ -17,14 +17,18 @@ const Requests = () => {
   const ref = db.collection("Requests");
 
   function getRequests() {
-    ref.where("driver", "==", "").onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push({ ...doc.data(), id: doc.id });
+    ref
+      .where("driver", "==", "")
+      .where("completed", "==", false)
+      .onSnapshot((querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push({ ...doc.data(), id: doc.id });
+        });
+        setRequestsData(items);
       });
-      setRequestsData(items);
-    });
   }
+
   useEffect(() => {
     getRequests();
     persistRequest();
@@ -40,7 +44,6 @@ const Requests = () => {
       driverName: currentUser.displayName,
     });
     setRideRequest(request);
-
     // remove accepted request from current list
     setRequestsData(
       requestsData.filter((obj) => {
@@ -49,29 +52,39 @@ const Requests = () => {
     );
   };
 
+  // function called when the arrived button is clicked
   const handleArrived = () => {
     const ref = db.collection("Requests").doc(rideRequest.id);
 
+    // update the status and the driverCompleted values accordingly
     ref.update({
       status: "Arrived",
       driverCompleted: "true",
     });
 
+    // determine if both userCompleted and driverCompleted values are true
+    // if true, then update the completed field to true, which completes the entire ride
     ref.get().then(function (doc) {
       if (doc.exists) {
-        if (doc.data().userCompleted === "true" && doc.data().driverCompleted === "true") {
+        if (
+          doc.data().userCompleted === "true" &&
+          doc.data().driverCompleted === "true"
+        ) {
           ref.update({
             completed: "true",
           });
+          // since ride is completed, there is no more current ride, thus set ride request to empty
           setRideRequest({});
         }
       }
     });
-    //}
   };
 
+  // function called when cancel button clicked
   const handleCancel = () => {
+    // first, let driver confirm that they want to cancel the ride
     if (window.confirm(`Cancel ride by ${rideRequest.passengerName}?`)) {
+      // remove driver from the specific ride so that it can be assigned to someone else, and set status to none
       db.collection("Requests")
         .doc(rideRequest.id)
         .update({
@@ -80,6 +93,7 @@ const Requests = () => {
           status: "",
         })
         .then(() => {
+          // since there is no current request anymore, set the current ride request to empty
           setRideRequest({});
         });
     }
@@ -112,26 +126,33 @@ const Requests = () => {
   };
 
   const persistRequest = () => {
-    const item = [];
-    ref.where("driver", "==", currentUser.email).onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        item.push({ ...doc.data(), id: doc.id });
+    ref
+      .where("driver", "==", currentUser.email)
+      .where("completed", "==", false)
+      .onSnapshot((querySnapshot) => {
+        const item = [];
+        querySnapshot.forEach((doc) => {
+          item.push({ ...doc.data(), id: doc.id });
+        });
+
+        const reduceditem = arrayToObject(item);
+        setRideRequest(reduceditem);
       });
-      const reduceditem = arrayToObject(item);
-      setRideRequest(reduceditem);
-    });
   };
 
+  // converts an array to an object which is used by the persist request function
   const arrayToObject = (arr) =>
     arr.reduce((obj, item) => {
       obj = item;
       return obj;
     }, {});
 
+  // html for the page
+  // if ride request is empty, then do not show the current ride card
   return (
     <div className="flex flex-col">
       <div className="my-8 mx-6 text-center">
-        {Object.keys(rideRequest).length !== 0 && rideRequest.completed === false && (
+        {Object.keys(rideRequest).length !== 0 && (
           <AcceptedRequestCard
             ride={rideRequest}
             handleClick={handleStatusChange}
@@ -151,7 +172,6 @@ const Requests = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  {/* these are the same th, prolly better if we make things like this reusable considering we don't know what we'll be building in the future */}
                   <th
                     scope="col"
                     className="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -181,7 +201,10 @@ const Requests = () => {
                     key={data.id}
                     data={data}
                     acceptRequest={acceptRequest}
-                    disableButton={Object.keys(rideRequest).length !== 0 && rideRequest.completed === false}
+                    disableButton={
+                      Object.keys(rideRequest).length !== 0 &&
+                      rideRequest.completed === false
+                    }
                   />
                 ))}
               </tbody>
