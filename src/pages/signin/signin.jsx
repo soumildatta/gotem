@@ -15,15 +15,17 @@ const Signin = () => {
   const history = useHistory();
 
   //redirect to different pages based on user persona
-  async function redirect(){
-    db.collection("Users").doc(email).get().then((doc) => {
-      if (doc.data().persona === "passenger"){
-        history.push("/dashboard");
-      }
-      else{
-        history.push("/requests");
-      }
-    });
+  async function redirect() {
+    db.collection("Users")
+      .doc(email)
+      .get()
+      .then((doc) => {
+        if (doc.data().persona === "passenger") {
+          history.push("/dashboard");
+        } else {
+          history.push("/requests");
+        }
+      });
   }
 
   //function to handle submit of login form
@@ -42,6 +44,7 @@ const Signin = () => {
     setLoading(false);
   }
 
+  // return the form skeleton component
   return (
     <FormSkeleton
       text="New User?"

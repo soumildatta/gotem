@@ -19,6 +19,7 @@ const Signup = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    // if the persona is a passenger, go to the passenger pages. otherwise go to the driver pages
     try {
       setError("");
       setLoading(true);

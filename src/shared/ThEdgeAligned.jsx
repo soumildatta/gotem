@@ -1,5 +1,6 @@
 import React from "react";
 
+// reusable component for headers used in the driver and passenger dashboards
 const ThEdgeAligned = ({ header1, header2 }) => {
   return (
     <thead className="bg-gray-50">

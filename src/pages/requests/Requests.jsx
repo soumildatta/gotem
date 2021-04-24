@@ -107,14 +107,12 @@ const Requests = () => {
       status: "Waiting",
     });
   };
-
   // function called when button is clicked. Updates status to En Route
   const handleEnRoute = () => {
     db.collection("Requests").doc(rideRequest.id).update({
       status: "En Route",
     });
   };
-
   const handleStatusChange = (button) => {
     if (button !== "Cancel") {
       if (window.confirm(`Change status to "${button}"?`)) {

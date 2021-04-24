@@ -1,5 +1,6 @@
 import React from "react";
 
+// component for properly displaying input boxes with the desired rounded property
 const Input = ({ onChange, fieldName, type, round, required = false }) => {
   // determines border radius of button
   const chooseRounding = () => {
