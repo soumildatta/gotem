@@ -14,7 +14,6 @@ const UserDashboard = () => {
 
   const history = useHistory();
   const { requests, currentRequest } = useFetchRequests({ isDriver: false });
-
   const hasCurrentRide = () => {
     return currentRequest === undefined;
   };
@@ -31,11 +30,12 @@ const UserDashboard = () => {
     }
   };
 
-  // function
+  // function that handles completion of the passenger's ride
   const handleComplete = () => {
     if (window.confirm("Please confirm that the ride is completed.")) {
       let ref = db.collection("Requests").doc(currentRequest.id);
 
+      // if the driver and passenger have both clicked complete, then the ride completes
       ref.get().then(function (doc) {
         if (doc.exists) {
           if (doc.data().driver !== "") {
@@ -62,6 +62,7 @@ const UserDashboard = () => {
     }
   };
 
+  // if clicked on the edit button, set url parameters and move to the requestRide page
   const handleEdit = () => {
     let ref = db.collection("Requests").doc(currentRequest.id);
 
@@ -78,6 +79,7 @@ const UserDashboard = () => {
     });
   };
 
+  // display the button if no current ride, else display current ride
   const RenderRideDetails = () => {
     return (
       <div className="my-8 mx-6 text-center">
@@ -95,6 +97,7 @@ const UserDashboard = () => {
     );
   };
 
+  // html for the rest of the page that displays the previous completed rides
   return (
     <div>
       <RenderRideDetails />

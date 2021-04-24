@@ -9,12 +9,14 @@ const AcceptedRequestCard = ({
   handleEnRoute,
   handleArrived,
 }) => {
+  // create an object that can be passed in as a singular prop into RideInfoSkeleton
   const rideInfo = {
     time: { date: ride.date, time: ride.time },
     name: ride.passengerName,
     status: ride.status,
   };
 
+  // displays the RideInfoSkeleton
   return (
     <div>
       <RideInfoSkeleton

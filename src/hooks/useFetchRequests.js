@@ -7,6 +7,7 @@ const useFetchRequests = (user) => {
   const [requests, setRequests] = useState([]);
   const [currentRequest, setCurrentRequest] = useState({});
 
+  // user can be type driver or passenger
   const { isDriver } = user;
   const userType = isDriver ? "driver" : "user";
   // fetch from firestore
@@ -19,8 +20,10 @@ const useFetchRequests = (user) => {
           fetchedRequests.push({ ...doc.data(), id: doc.id });
         });
 
+        // update the requests state with the requests recently fetched
         setRequests(fetchedRequests);
 
+        // if the user is a passenger, then return all the documents where the request is not completed
         if (!isDriver) {
           setCurrentRequest(
             fetchedRequests.filter((request) => {

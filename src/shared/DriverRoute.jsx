@@ -16,7 +16,7 @@ export default function DriverRoute({ component: Component, ...rest }) {
   }
 
   //if no user is logged in, redirect them to the signin page
-  if (!isLoggedIn){
+  if (!isLoggedIn) {
     return (
       <Route
         {...rest}
@@ -36,9 +36,13 @@ export default function DriverRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props => {
-        return isDriver ? <Component {...props} /> : <Redirect to="/dashboard" />
+      render={(props) => {
+        return isDriver ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/dashboard" />
+        );
       }}
     ></Route>
-  )
+  );
 }

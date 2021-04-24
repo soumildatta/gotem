@@ -75,7 +75,7 @@ const Persona = () => {
   );
 };
 
-//the links/buttons shown on the right side of the navbar 
+//the links/buttons shown on the right side of the navbar
 const Links = () => {
   const { isLoggedIn } = useAuth("false");
   const [persona, setPersona] = useState("passenger");
@@ -94,7 +94,8 @@ const Links = () => {
         </a>
       </div>
     );
-  } else {  //get logged in user's persona
+  } else {
+    //get logged in user's persona
     if (currentUser != null) {
       db.collection("Users")
         .get()
