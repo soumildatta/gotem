@@ -1,5 +1,6 @@
 import React from "react";
 const RequestCards = ({ data, acceptRequest, disableButton }) => {
+  // function to format 24 hour time to 12 hour time
   const formatTime = (time) => {
     time = time
       .toString()
@@ -12,6 +13,8 @@ const RequestCards = ({ data, acceptRequest, disableButton }) => {
     }
     return time.join("");
   };
+
+  // renders buttons on requests. If a request has not been accepted, it can be clicked. If a request has been accepted, it will not be possible to accept another request.
   const renderButtons = () => {
     if (disableButton === false) {
       return (
@@ -34,7 +37,7 @@ const RequestCards = ({ data, acceptRequest, disableButton }) => {
       );
     }
   };
-
+  // html for the page
   return (
     <tr>
       <td className="px-4 py-4 whitespace-nowrap">
@@ -51,8 +54,6 @@ const RequestCards = ({ data, acceptRequest, disableButton }) => {
         <div className="text-sm text-gray-900">{data.location}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        {/* these are the same span, prolly better if we make things like this reusable considering we don't know what we'll be building in the future */}
-        {/* also, best practice is to break this logic out into a function above and pass data.status as a param returning the correct span */}
         <span className="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full border border-black text-black">
           {data.date} at {formatTime(data.time)}
         </span>

@@ -1,5 +1,6 @@
 import React from "react";
 
+// html for this component which are cards for the previously completed requests
 const UserRequestCards = ({ requests }) => {
   return (
     <tr>

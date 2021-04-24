@@ -3,6 +3,7 @@ import CardButton from "./CardButton";
 
 const cardHeaders = new Set(["status", "time", "driver", "name"]);
 
+//basic format for current request card for passengers and drivers
 const RideInfoSkeleton = ({
   title,
   destination,
@@ -40,6 +41,7 @@ const RideInfoSkeleton = ({
     );
   });
 
+  // renders buttons for the driver if the user is a driver
   const driverButtons = () => {
     return (
       <div className="flex justify-center mb-2">
@@ -55,6 +57,7 @@ const RideInfoSkeleton = ({
     );
   };
 
+  // renders the buttons for the passenger if the user is a passenger
   const userButtons = () => {
     return (
       <div className="flex justify-center mb-2">
@@ -85,6 +88,7 @@ const RideInfoSkeleton = ({
     return <div>{isDriver ? driverButtons() : userButtons()}</div>;
   };
 
+  // render the address
   const renderRiderAddress = () => {
     return (
       Boolean(riderAddress) && (
@@ -96,6 +100,7 @@ const RideInfoSkeleton = ({
     );
   };
 
+  // html fo rthe page
   return (
     <div className="border rounded-md border-gray-700">
       <div className="text-3xl my-2">{title}:</div>

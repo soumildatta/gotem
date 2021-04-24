@@ -1,5 +1,6 @@
 import React from "react";
 
+//basic formatting of any buttons that may appear on any card
 const CardButton = ({ text, color, handleClick }) => {
   return (
     <button

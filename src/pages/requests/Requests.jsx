@@ -16,6 +16,7 @@ const Requests = () => {
 
   const ref = db.collection("Requests");
 
+  // retrieve requests where no driver has accepted the request and the ride is not complete from firebase
   function getRequests() {
     ref
       .where("driver", "==", "")
@@ -25,15 +26,16 @@ const Requests = () => {
         querySnapshot.forEach((doc) => {
           items.push({ ...doc.data(), id: doc.id });
         });
-        setRequestsData(items);
+        setRequestsData(items); // calls useState to update the requests
       });
   }
 
   useEffect(() => {
-    getRequests();
-    persistRequest();
+    getRequests(); // calls function to get requests
+    persistRequest(); // calls function to always have accepted ride card persist
   }, []);
 
+  // updates the document according to the id from the accepted ride request
   const acceptRequest = (id) => {
     const request = requestsData.find((obj) => {
       return obj.id === id;
@@ -43,7 +45,7 @@ const Requests = () => {
       driver: currentUser.email,
       driverName: currentUser.displayName,
     });
-    setRideRequest(request);
+    setRideRequest(request); // calls useState to set ride request
     // remove accepted request from current list
     setRequestsData(
       requestsData.filter((obj) => {
@@ -99,18 +101,18 @@ const Requests = () => {
     }
   };
 
+  // function called when button is clicked. Updates status to waiting
   const handleWaiting = () => {
     db.collection("Requests").doc(rideRequest.id).update({
       status: "Waiting",
     });
   };
-
+  // function called when button is clicked. Updates status to En Route
   const handleEnRoute = () => {
     db.collection("Requests").doc(rideRequest.id).update({
       status: "En Route",
     });
   };
-
   const handleStatusChange = (button) => {
     if (button !== "Cancel") {
       if (window.confirm(`Change status to "${button}"?`)) {
@@ -124,7 +126,7 @@ const Requests = () => {
       }
     }
   };
-
+  // function to keep accepted ride card persistent on page
   const persistRequest = () => {
     ref
       .where("driver", "==", currentUser.email)
@@ -136,7 +138,7 @@ const Requests = () => {
         });
 
         const reduceditem = arrayToObject(item);
-        setRideRequest(reduceditem);
+        setRideRequest(reduceditem); // calls useState to update riderequest card
       });
   };
 
@@ -197,7 +199,7 @@ const Requests = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {requestsData.map((data) => (
-                  <RequestCards
+                  <RequestCards // displays user request cards cards
                     key={data.id}
                     data={data}
                     acceptRequest={acceptRequest}

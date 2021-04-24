@@ -1,6 +1,8 @@
 import React from "react";
 
+// component for properly displaying input boxes with the desired rounded property
 const Input = ({ onChange, fieldName, type, round, required = false }) => {
+  // determines border radius of button
   const chooseRounding = () => {
     if (round === "top") {
       return "rounded-t-md";
@@ -12,6 +14,7 @@ const Input = ({ onChange, fieldName, type, round, required = false }) => {
     return "";
   };
 
+  // capitalizes the first word of a string
   const getUpperFieldName = () => {
     return fieldName.charAt(0).toUpperCase() + fieldName.substring(1);
   };
