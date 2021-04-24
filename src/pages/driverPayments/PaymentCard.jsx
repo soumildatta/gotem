@@ -1,7 +1,6 @@
 import React from "react";
 
 const PaymentCard = ({ request }) => {
-  // html to display payment information about completed ride
   return (
     <tr>
       <td className="px-8 py-4">

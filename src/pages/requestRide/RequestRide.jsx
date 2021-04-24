@@ -17,10 +17,10 @@ const RequestRide = () => {
   const { isDriver } = useIsDriver();
   const { currentRequest } = useFetchRequests(isDriver);
 
-  // state that stores the values for the input which is initialized to empty
   const [input, setInput] = useState({
     location: "",
     hospital: "",
+    info: "",
     date: "",
     time: "",
   });
@@ -38,14 +38,11 @@ const RequestRide = () => {
     }
   }, [currentRequest, isEditMode]);
 
-  // function to change the page to the dashboard
   const history = useHistory();
   const goToDashboard = () => {
     history.push("/dashboard");
   };
 
-  // checks if the user is in edit mode and returns false if they are
-  // returns false is the inputs are empty
   const hasProperInput = () => {
     if (!isEditMode && Boolean(currentRequest)) {
       return false;

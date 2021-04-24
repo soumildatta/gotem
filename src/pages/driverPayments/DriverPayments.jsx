@@ -6,15 +6,12 @@ import useFetchRequests from "../../hooks/useFetchRequests";
 const DriverPayments = () => {
   const { requests } = useFetchRequests({ isDriver: true });
 
-  // adds all of the payments to be displayed as a lifetime earnings value
-  // formats it with the proper amount of commas
   const lifetimeEarning = useMemo(() => {
     const val = requests.reduce((sum, obj) => (sum += obj.price), 0);
     // regex adds a comma to the value of the price after every 3 digits
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }, [requests]);
 
-  // html for the page
   return (
     <div className="item">
       <div className="text-center">

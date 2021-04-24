@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-//formatting of links on the nav bar
 export default function NavLink({ linkName, linkDestination }) {
   return (
     <Link

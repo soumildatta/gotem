@@ -14,12 +14,9 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
 
   const { signup } = useAuth();
-
-  //function to handle submit of signup form
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // if the persona is a passenger, go to the passenger pages. otherwise go to the driver pages
     try {
       setError("");
       setLoading(true);

@@ -7,7 +7,6 @@ const Home = () => {
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#428FD7";
   }, []);
-  // refreshes home page if reset property is set
   useEffect(() => {
     if (shouldRefresh) {
       localStorage.removeItem("reset");

@@ -5,7 +5,6 @@ import Input from "../../shared/Input";
 import { useLocation } from "react-router-dom";
 import { resetPassword } from "./utils";
 
-//using built-in firebase functions to reset user object password
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");

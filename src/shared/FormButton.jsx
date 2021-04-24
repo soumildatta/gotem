@@ -1,6 +1,5 @@
 import React from "react";
 
-//formatting of buttons on any forms used throughout the site
 const FormButton = ({ onClick, text, type = "submit" }) => {
   return (
     <button

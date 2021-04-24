@@ -2,7 +2,6 @@ import React from "react";
 import logo from "../shared/logo_v1.png";
 import { Link } from "react-router-dom";
 
-//basic format of all forms used in the signin, signup, and forgot password pages
 const FormSkeleton = ({
   children,
   text,
@@ -34,10 +33,7 @@ const FormSkeleton = ({
         </form>
 
         <p className="text-center text-sm text-gray-600">
-          <Link
-            to="/"
-            className="font-medium text-primaryBlue hover:text-blue-600"
-          >
+          <Link to="/" className="font-medium text-primaryBlue hover:text-blue-600">
             RETURN HOME
           </Link>
         </p>
