@@ -19,6 +19,7 @@ const UserDashboard = () => {
     return currentRequest === undefined;
   };
 
+  // function called when cancel button is clicked. Used to cancel a ride request. Once clicked, deletes document from firebase.
   const handleCancel = () => {
     if (window.confirm("Please confirm ride cancellation.")) {
       db.collection("Requests")
@@ -30,6 +31,7 @@ const UserDashboard = () => {
     }
   };
 
+  // function
   const handleComplete = () => {
     if (window.confirm("Please confirm that the ride is completed.")) {
       let ref = db.collection("Requests").doc(currentRequest.id);
