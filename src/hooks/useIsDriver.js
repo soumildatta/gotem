@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 
+
+//checking if current user is a driver or not
+//without worrying about async functions not updating fast enough
 const useIsDriver = () => {
   const { currentUser } = useAuth();
   const [isDriver, setIsDriver] = useState(false);

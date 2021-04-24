@@ -4,6 +4,7 @@ import FormSkeleton from "../../shared/FormSkeleton";
 import Input from "../../shared/Input";
 import { sendForgotPasswordEmail } from "./utils";
 
+//using built-in firebase functions to send password reset email 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");

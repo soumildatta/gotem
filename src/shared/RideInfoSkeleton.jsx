@@ -3,6 +3,7 @@ import CardButton from "./CardButton";
 
 const cardHeaders = new Set(["status", "time", "driver", "name"]);
 
+//basic format for current request card for passengers and drivers
 const RideInfoSkeleton = ({
   title,
   destination,
