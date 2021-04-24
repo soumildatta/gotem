@@ -12,6 +12,7 @@ const fail = {
   color: "red",
 };
 
+// function that sends a forgot password email
 export const sendForgotPasswordEmail = async (email) => {
   try {
     await auth.sendPasswordResetEmail(email);
@@ -21,6 +22,7 @@ export const sendForgotPasswordEmail = async (email) => {
   }
 };
 
+// function that resets password
 export const resetPassword = async (oobCode, password) => {
   try {
     await auth.verifyPasswordResetCode(oobCode);
