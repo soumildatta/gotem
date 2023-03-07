@@ -1,6 +1,6 @@
 <!-- # Getting Started with Create React App -->
 # Gotem
-Gotem is a medical transportation system currently servicing the Oxford, Mississippi area. It is a convenient and accessible application that allows users to receive efficient transportation specialized for hospital and clinical visits. The vision of this app, Gotem, is to make it possible for people who are not able to make such trips on their own to be able to gain access to medical services, which many consider a basic human right. <br/><br/>
+Gotem is a medical transportation system servicing the Oxford, Mississippi area. It is a convenient and accessible application that allows users to receive efficient transportation specialized for hospital and clinical visits. The vision of this app, Gotem, is to make it possible for people who are not able to make such trips on their own to be able to gain access to medical services, which many consider a basic human right. <br/><br/>
 This website is hosted at this link → [Gotem](https://project-4cb84.web.app/)
 
 ## Development Environment
